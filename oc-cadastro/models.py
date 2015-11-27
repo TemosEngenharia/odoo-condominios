@@ -1,15 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api
-
- class oc-cadastro(models.Model):
-     _name = 'oc-cadastro.oc-cadastro'
-
-     name = fields.Char()
-     value = fields.Integer()
-     value2 = fields.Float(compute="_value_pc", store=True)
-     description = fields.Text()
-
-     @api.depends('value')
-     def _value_pc(self):
-         self.value2 = float(self.value) / 100
+class occbloco(models.Model):
+    _name = 'occ.bloco'
+    name = fields.Char('Nome do Bloco', required=True)

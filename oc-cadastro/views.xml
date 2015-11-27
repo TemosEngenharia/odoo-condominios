@@ -1,60 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="oc-cadastro.list">
-      <field name="name">oc-cadastro list</field>
-      <field name="model">oc-cadastro.oc-cadastro</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
-    -->
-
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="oc-cadastro.action_window">
-      <field name="name">oc-cadastro window</field>
-      <field name="res_model">oc-cadastro.oc-cadastro</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-    -->
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="oc-cadastro.action_server">
-      <field name="name">oc-cadastro server</field>
-      <field name="model_id" ref="model_oc-cadastro_oc-cadastro"/>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
-    </record>
-    -->
-  
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="oc-cadastro" id="oc-cadastro.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="oc-cadastro.menu_1" parent="oc-cadastro.menu_root"/>
-    <menuitem name="Menu 2" id="oc-cadastro.menu_2" parent="oc-cadastro.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="oc-cadastro.menu_1_list" parent="oc-cadastro.menu_1"
-              action="oc-cadastro.action_window"/>
-    <menuitem name="Server to list" id="oc-cadastro" parent="oc-cadastro.menu_2"
-              action="oc-cadastro.action_server"/>
-    -->
+  	<!-- Criação do Menu Cadastro -->
+  	<menuitem id="occ_Cadastro" name="Cadastro" />
+  	
+  	<!-- Action to open OCCadastro.Bloco -->
+  	<act_window id="action_occ_bloco"
+  		name="Registro de Blocos"
+  		res_model="occ.bloco"
+  		view_mode="tree,form"/>
+  		
+  	<!-- Menu item to open OCCadastro Bloco -->
+  	<menuitem id="menu_occ_bloco"
+  		name="Bloco"
+  		parent="occ_Cadastro"
+  		sequence="0"
+  		action="action_occ_bloco" />
   </data>
+  <record id="view_occ_bloco" model="ir.ui.view">
+  	<field name="name">Bloco Form</field>
+  	<field name="model">occ.bloco</field>
+  	<field name="arch" type="xml">
+  	
+  		<form string="Nome do Bloco">
+  			<field name="name"/>
+  		</form>
+  	</field>
+  </record>
 </openerp>

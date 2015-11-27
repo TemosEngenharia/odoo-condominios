@@ -1,23 +1,31 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "oc-cadastro",
+    'name': "Cadastro Controle de Acesso",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Módulo para realizar o cadastro dos veículos, vagas, moradores,
+        apartamentos, blocos e TAGs""",
 
     'description': """
-        Long description of module's purpose
+        Módulo do Sistema de Controle de Acesso para realizar o cadastro dos itens:
+            - Blocos
+            - Apartamentos
+            - Vagas para carro
+            - Vagas para motos
+            - Moradores
+            - Carros
+            - Motos
+            - TAGs
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "E2i9",
+    'website': "http://www.e2i9.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
+    'category': 'Specific Industry Applications',
+    'version': '9.0.0.0.1',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -26,10 +34,10 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views.xml',
-        'templates.xml',
+        #'templates.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo.xml',
-    ],
+    #'demo': [
+    #    'demo.xml',
+    #],
 }
