@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+  	<!-- Criação do Menu Usuários -->
+  	<menuitem id="oc_User"
+  		name="Usuários"
+  		parent="oc_Adm"
+  		sequence="0"/>
+  	<!-- Criação do Menu Perfis -->
+  	<menuitem id="oc_Group"
+  		name="Perfis"
+  		parent="oc_Adm"
+  		sequence="10"/>
+  	<!-- Criação do Menu Calendários -->
+  	<menuitem id="oc_Calendar"
+  		name="Calendários"
+  		parent="oc_Adm"
+  		sequence="20"/>
+  	<!-- Criação do Menu Controladoras -->
+  	<menuitem id="oc_Controlers"
+  		name="Controladoras"
+  		parent="oc_Adm"
+  		sequence="30"/>
+  </data>
+</openerp>

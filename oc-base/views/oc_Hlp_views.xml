@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+  	<!-- Criação do Menu Bem vindo -->
+  	<menuitem id="oc_Welcome"
+  		name="Bem vindo"
+  		parent="oc_Hlp"
+  		sequence="0"/>
+  	<!-- Criação do Menu manual do usuário -->
+  	<menuitem id="oc_UserManual"
+  		name="Manual do Usuário"
+  		parent="oc_Hlp"
+  		sequence="10"/>
+  	<!-- Criação do Menu Sobre -->
+  	<menuitem id="oc_About"
+  		name="Sobre"
+  		parent="oc_Hlp"
+  		sequence="20"/>
+  </data>
+</openerp>

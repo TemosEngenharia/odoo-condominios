@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+  	<!-- Criação do Menu Cadastro -->
+  	<menuitem id="oc_Register"
+  		name="Cadastro"
+  		parent="oc_Opr"
+  		sequence="0"/>
+  	<!-- Criação do Menu Contatos -->
+  	<menuitem id="oc_Contacts"
+  		name="Contatos"
+  		parent="oc_Opr"
+  		sequence="10"/>
+  	<!-- Criação do Menu Agenda -->
+  	<menuitem id="oc_Agenda"
+  		name="Agenda"
+  		parent="oc_Opr"
+  		sequence="20"/>
+  	<!-- Criação do Menu Relatórios -->
+  	<menuitem id="oc_Reports"
+  		name="Relatórios"
+  		parent="oc_Opr"
+  		sequence="30"/>
+  	<!-- Criação do Menu Controles -->
+  	<menuitem id="oc_Control"
+  		name="Controles"
+  		parent="oc_Opr"
+  		sequence="40"/>
+  </data>
+</openerp>

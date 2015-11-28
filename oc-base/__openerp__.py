@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Cadastro Controle de Acesso",
+    'name': "Controle de Acesso",
 
     'summary': """
-        Módulo para realizar o cadastro dos veículos, vagas, moradores,
-        apartamentos, blocos e TAGs""",
+        Aplicativo de controle de acesso de portaria no Odoo""",
 
     'description': """
-        Módulo do Sistema de Controle de Acesso para realizar o cadastro dos itens:
-            - Blocos
-            - Apartamentos
-            - Vagas para carro
-            - Vagas para motos
+        Sistema de Controle de Acesso dos itens:
             - Moradores
+            - Vagas
             - Carros
             - Motos
             - TAGs
@@ -26,16 +22,19 @@
     # for the full list
     'category': 'Specific Industry Applications',
     'version': '9.0.0.0.1',
+    
+    'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'oc-base'],
-    'auto_install': False,
+    'depends': ['base'],
 
     # always loaded
     'data': [
-        #'security/ir.model.access.csv',
-        'views/occ_bloco_views.xml',
-        'views/occ_apto_views.xml',
+        # 'security/ir.model.access.csv',
+        'views/oc_views.xml',
+        'views/oc_Adm_views.xml',
+        'views/oc_Opr_views.xml',
+        'views/oc_Hlp_views.xml',
         #'templates.xml',
     ],
     # only loaded in demonstration mode
