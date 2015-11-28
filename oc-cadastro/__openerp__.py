@@ -36,6 +36,7 @@
         #'security/ir.model.access.csv',
         'views/occ_bloco_views.xml',
         'views/occ_apto_views.xml',
+        'views/occ_pessoas_views.xml',
         #'templates.xml',
     ],
     # only loaded in demonstration mode

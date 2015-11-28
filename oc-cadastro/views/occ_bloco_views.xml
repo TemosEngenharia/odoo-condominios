@@ -26,7 +26,8 @@
 			  <group name="group_top">
       			<group name="group_left">
         			<field name="name"/>
-	  				<field name="apto"/> -->
+	  				<field name="apto"/>
+	  				<field name="pessoas"/>
       			</group>
       			<group name="group_right">
 					<!-- Aqui vai o conteúdo -->

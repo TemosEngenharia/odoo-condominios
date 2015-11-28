@@ -27,24 +27,14 @@
       			<group name="group_left">
         			<field name="name"/>
   					<field name="bloco_id"/>
+  					<field name="pessoas"/>
       			</group>
       			<group name="group_right">
 					<!-- Aqui vai o conteúdo -->
-	  				<!-- <field name="name"/> -->
       			</group>
     		  </group>
    			</sheet>
   		</form>
    	</field>
   </record>
-<!-- <record id="view_tree_occ_apto" model="ir.ui_view">
-  	<field name="name">Apartamento Tree</field>
-  	<field name="model">occ.apto</field>
-  	<field name="arch" type="xml">
-  		<tree>
-	  		<field name="name"/>
-  			<field name="bloco_id"/>
-  		</tree>
-  	</field>
-  </record> -->
 </openerp>  	

@@ -6,5 +6,6 @@ class OccBloco(models.Model):
     _order = 'name'
     _rec_name = 'name'
     _table = 'occ_bloco'
-    name = fields.Char('Bloco', required=True)
+    name = fields.Char('Bloco', size=40, translate=True, required=True)
     apto = fields.One2many('occ.apto', 'bloco_id', 'Apartamentos neste bloco')
+    pessoas = fields.One2many('occ.pessoas', 'bloco_id', 'Moradores neste bloco')

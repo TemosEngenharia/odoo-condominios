@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+  	<!-- Action to open OCCadastro.Pessoas -->
+  	<act_window id="action_occ_pessoas"
+  		name="Registro de Moradores"
+  		res_model="occ.pessoas"
+  		view_mode="tree,form"/>
+
+  	<!-- Menu item to open OCCadastro.Pessoas -->
+  	<menuitem id="menu_occ_pessoas"
+  		name="Moradores"
+  		parent="oc-base.oc_Register"
+  		sequence="2"
+  		action="action_occ_pessoas" />  	
+  </data>
+  <record id="view_form_occ_pessoas" model="ir.ui.view">
+  	<field name="name">Pessoas Form</field>
+  	<field name="model">occ.pessoas</field>
+  	<field name="arch" type="xml">
+   		<form>
+   			<header>
+   				<!-- Aqui vão os botões -->
+   			</header>
+   			<sheet>
+			  <group name="group_top">
+      			<group name="group_left">
+        			<field name="name"/>
+					<field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/>
+			        <field name="telefone" widget="phone"/>
+        			<field name="celular" widget="phone"/>
+        			<field name="email" widget="email"/>
+        			<field name="rg"/>
+        			<field name="cpf"/>
+      			</group>
+      			<group name="group_right">
+	  				<field name="apto_id"/>
+	  				<field name="bloco_id"/>
+				</group>
+    		  </group>
+   			</sheet>
+  		</form>
+   	</field>
+  </record>
+</openerp>

@@ -6,6 +6,6 @@ class OccApto(models.Model):
     _order = 'name'
     _rec_name = 'name'
     _table = 'occ_apto'
-    name = fields.Char('Apartamento', required=True)
+    name = fields.Char('Apartamento', size=40, translate=True, required=True)
     bloco_id = fields.Many2one('occ.bloco', 'Bloco', required=True)
-    
+    pessoas = fields.One2many('occ.pessoas', 'apto_id', 'Moradores neste apartamento')
