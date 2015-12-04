@@ -10,15 +10,15 @@
   	<!-- Menu item to open OCCadastro Apto -->
   	<menuitem id="menu_occ_apto"
   		name="Apartamento"
-  		parent="oc-base.oc_Register"
-  		sequence="1"
+  		parent="oc_Register"
+  		sequence="2"
   		action="action_occ_apto" />  	
   </data>
   <record id="view_form_occ_apto" model="ir.ui.view">
   	<field name="name">Apartamento Form</field>
   	<field name="model">occ.apto</field>
-  	<field name="arch" type="xml">
-   		<form>
+  	<field  name="arch" type="xml">
+   		<form string="Nome do Apartamento">
    			<header>
    				<!-- Aqui vão os botões -->
    			</header>
@@ -26,25 +26,17 @@
 			  <group name="group_top">
       			<group name="group_left">
         			<field name="name"/>
-  					<field name="bloco_id"/>
+	  				<field name="bloco_id"/>
+	  				<field name="morador_ids"/>
+	  				<field name="vaga_id"/>
       			</group>
       			<group name="group_right">
 					<!-- Aqui vai o conteúdo -->
-	  				<!-- <field name="name"/> -->
       			</group>
     		  </group>
    			</sheet>
   		</form>
    	</field>
   </record>
-<!-- <record id="view_tree_occ_apto" model="ir.ui_view">
-  	<field name="name">Apartamento Tree</field>
-  	<field name="model">occ.apto</field>
-  	<field name="arch" type="xml">
-  		<tree>
-	  		<field name="name"/>
-  			<field name="bloco_id"/>
-  		</tree>
-  	</field>
-  </record> -->
-</openerp>  	
+
+</openerp>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+  	<!-- Action to open OCCadastro.Vaga -->
+  	<act_window id="action_occ_veiculo" name="Registro de Veiculo" res_model="occ.veiculo" view_mode="tree,form"/>
+
+  	<!-- Menu item to open OCCadastro Vaga -->
+  	<menuitem id="menu_occ_veiculo" name="Veiculo" parent="oc_Register" sequence="5" action="action_occ_veiculo"/>
+  </data>
+</openerp>

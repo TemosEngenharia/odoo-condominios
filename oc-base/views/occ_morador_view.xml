@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+  	<!-- Action to open OCCadastro.Moradores -->
+  	<act_window id="action_occ_morador"
+  		name="Registro de Morador"
+  		res_model="occ.morador"
+  		view_mode="tree,form"/>
+
+  	<!-- Menu item to open OCCadastro.Morador -->
+  	<menuitem id="menu_occ_morador"
+  		name="Morador"
+  		parent="oc_Register"
+  		sequence="3"
+  		action="action_occ_morador" />  	
+  </data>
+</openerp>

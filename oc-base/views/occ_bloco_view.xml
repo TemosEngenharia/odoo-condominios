@@ -10,10 +10,19 @@
   	<!-- Menu item to open OCCadastro Bloco -->
   	<menuitem id="menu_occ_bloco"
   		name="Bloco"
-  		parent="oc-base.oc_Register"
-  		sequence="0"
+  		parent="oc_Register"
+  		sequence="1"
   		action="action_occ_bloco" />
   </data>
+  <record id="view_tree_occ_bloco" model="ir.ui.view">
+  	<field name="name">Bloco tree</field>
+  	<field name="model">occ.bloco</field>
+  	<field  name="arch" type="xml">
+   		<tree>
+   			<field name="name"/>
+   		</tree>
+   	</field>
+  </record>
   <record id="view_form_occ_bloco" model="ir.ui.view">
   	<field name="name">Bloco Form</field>
   	<field name="model">occ.bloco</field>
@@ -26,7 +35,9 @@
 			  <group name="group_top">
       			<group name="group_left">
         			<field name="name"/>
-	  				<field name="apto"/> -->
+	  		<!--	<field name="apto_ids"/>
+	  				<field name="morador_ids"/>
+	  				<field name="vaga_ids"/> -->	
       			</group>
       			<group name="group_right">
 					<!-- Aqui vai o conteúdo -->
@@ -36,4 +47,4 @@
   		</form>
    	</field>
   </record>
-</openerp>  	
+</openerp>
