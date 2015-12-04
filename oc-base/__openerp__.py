@@ -31,10 +31,16 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/oc_views.xml',
-        'views/oc_Adm_views.xml',
-        'views/oc_Opr_views.xml',
-        'views/oc_Hlp_views.xml',
+        'views/oc_view.xml',
+        'views/oc_Adm_view.xml',
+        'views/oc_Opr_view.xml',
+        'views/oc_Hlp_view.xml',
+        'views/occ_bloco_view.xml',
+        'views/occ_apto_view.xml',
+        'views/occ_morador_view.xml',
+        'views/occ_veiculo_view.xml',
+        'views/occ_vaga_view.xml',
+        'views/occ_tag_view.xml',
         #'templates.xml',
     ],
     # only loaded in demonstration mode

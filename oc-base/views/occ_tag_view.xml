@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+  	<!-- Action to open OCCadastro.TAG -->
+  	<act_window id="action_occ_tag" name="Registro de TAG" res_model="occ.tag" view_mode="tree,form"/>
+
+  	<!-- Menu item to open OCCadastro TAG -->
+  	<menuitem id="menu_occ_tag" name="TAG" parent="oc_Register" sequence="6" action="action_occ_tag" />
+  </data>
+</openerp>

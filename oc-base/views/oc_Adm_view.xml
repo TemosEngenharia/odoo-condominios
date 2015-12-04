@@ -11,11 +11,11 @@
   		name="Perfis"
   		parent="oc_Adm"
   		sequence="10"/>
-  	<!-- Criação do Menu Calendários -->
+  	<!-- Criação do Menu Calendários
   	<menuitem id="oc_Calendar"
   		name="Calendários"
   		parent="oc_Adm"
-  		sequence="20"/>
+  		sequence="20"/> -->
   	<!-- Criação do Menu Controladoras -->
   	<menuitem id="oc_Controlers"
   		name="Controladoras"

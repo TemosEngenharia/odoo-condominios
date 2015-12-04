@@ -6,16 +6,16 @@
   		name="Cadastro"
   		parent="oc_Opr"
   		sequence="0"/>
-  	<!-- Criação do Menu Contatos -->
+  	<!-- Criação do Menu Contatos
   	<menuitem id="oc_Contacts"
   		name="Contatos"
   		parent="oc_Opr"
-  		sequence="10"/>
-  	<!-- Criação do Menu Agenda -->
+  		sequence="10"/> -->
+  	<!-- Criação do Menu Agenda
   	<menuitem id="oc_Agenda"
   		name="Agenda"
   		parent="oc_Opr"
-  		sequence="20"/>
+  		sequence="20"/> -->
   	<!-- Criação do Menu Relatórios -->
   	<menuitem id="oc_Reports"
   		name="Relatórios"
