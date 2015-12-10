@@ -7,4 +7,44 @@
   	<!-- Menu item to open OCCadastro Vaga -->
   	<menuitem id="menu_occ_veiculo" name="Veiculo" parent="oc_Register" sequence="5" action="action_occ_veiculo"/>
   </data>
+  <record id="view_tree_occ_veiculo" model="ir.ui.view">
+  	<field name="name">Veiculo tree</field>
+  	<field name="model">occ.veiculo</field>
+  	<field  name="arch" type="xml">
+   		<tree editable="True">
+   			<field name="name"/>
+   			<field name="tipo" widget="selection"/>
+   			<field name="morador_id"/>
+   			<field name="tag_id"/>
+<!--  
+			<field name="vaga_carro_ids" attrs="{'invisible': [('tipo','=', 'moto')]}"/>
+	  		<field name="vaga_moto_ids" attrs="{'invisible': [('tipo','=', 'carro')]}"/>
+-->
+   		</tree>
+   	</field>
+  </record>
+  <record id="view_form_occ_veiculo" model="ir.ui.view">
+  	<field name="name">Veiculo Form</field>
+  	<field name="model">occ.veiculo</field>
+  	<field  name="arch" type="xml">
+   		<form string="Veículo">
+   			<header>
+   				<!-- Aqui vão os botões -->
+   			</header>
+   			<sheet>
+			  <group name="group_top">
+      			<group name="group_left">
+        			<field name="name"/>
+	  				<field name="tipo" widget="radio"/>
+	  				<field name="tag_id"/>
+	  				<field name="morador_id"/>
+      			</group>
+      			<group name="group_right">
+
+      			</group>
+    		  </group>
+   			</sheet>
+  		</form>
+   	</field>
+  </record>
 </openerp>

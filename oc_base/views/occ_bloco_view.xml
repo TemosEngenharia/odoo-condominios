@@ -18,7 +18,7 @@
   	<field name="name">Bloco tree</field>
   	<field name="model">occ.bloco</field>
   	<field  name="arch" type="xml">
-   		<tree>
+   		<tree editable="True">
    			<field name="name"/>
    		</tree>
    	</field>

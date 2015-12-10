@@ -14,24 +14,44 @@ class OccBloco(models.Model):
                                'Apartamentos neste bloco')
     morador_ids = fields.One2many('occ.morador', 'bloco_id',
                                   'Moradores neste bloco')
-    vaga_ids = fields.One2many('occ.vaga', 'bloco_id',
-                               'Vagas neste bloco')
+    vaga_carro_ids = fields.One2many('occ.vaga.carro', 'bloco_id',
+                                     'Vagas para Carros neste bloco')
+    vaga_moto_ids = fields.One2many('occ.vaga.moto', 'bloco_id',
+                                    'Vagas para Motos neste bloco')
 
 
-class OccVaga(models.Model):
-    _name = 'occ.vaga'
-    _description = 'Detalhes das Vagas'
+class OccVagaCarro(models.Model):
+    _name = 'occ.vaga.carro'
+    _description = 'Detalhes das Vagas de Carros'
     _order = 'name'
-    _table = 'occ_vaga'
-    _sql_constraints = [('occ.vagas', 'UNIQUE (name)',
+    _table = 'occ_vaga_carro'
+    _sql_constraints = [('occ.vaga.carro', 'UNIQUE (name)',
                          'Os nomes das vagas devem ser únicos')]
-    name = fields.Char(string='Vaga', size=4, required=True)
-    tipo = fields.Selection([('carro', 'Vaga Carro'), ('moto', 'Vaga Moto')],
-                            "Tipo", default='carro', required=True)
-    bloco_id = fields.Many2one('occ.bloco', 'Bloco', ondelete="cascade",
-                               required=True)
-    apto_id = fields.Many2one('occ.apto', 'Apartamento')
-    tag_ids = fields.Many2many('occ.tag', 'TAG')
+    name = fields.Char(string='Vaga Carro', size=4, required=True)
+    bloco_id = fields.Many2one('occ.bloco', 'Bloco', required=True)
+    apto_id = fields.Many2one('occ.apto', 'Apartamento',
+                              domain="[('bloco_id','=',bloco_id)]")
+    tag_ids = fields.Many2many('occ.tag', 'occ_tag_carro_rel',
+                               'vaga_carro_ids', 'tag_ids',
+                               string='TAGs')
+#    veiculo_ids = fields.One2many('occ.veiculo', 'vaga_carro_ids', 'Carro')
+
+
+class OccVagaMoto(models.Model):
+    _name = 'occ.vaga.moto'
+    _description = 'Detalhes das Vagas de Motos'
+    _order = 'name'
+    _table = 'occ_vaga_moto'
+    _sql_constraints = [('occ.vaga.moto', 'UNIQUE (name)',
+                         'Os nomes das vagas devem ser únicos')]
+    name = fields.Char(string='Vaga Moto', size=4, required=True)
+    bloco_id = fields.Many2one('occ.bloco', 'Bloco', required=True)
+    apto_id = fields.Many2one('occ.apto', 'Apartamento',
+                              domain="[('bloco_id','=',bloco_id)]")
+    tag_ids = fields.Many2many('occ.tag', 'occ_tag_moto_rel',
+                               'vaga_moto_ids', 'tag_ids',
+                               string='TAGs')
+#    veiculo_ids = fields.One2many('occ.veiculo', 'vaga_moto_ids', 'Moto')
 
 
 class OccApto(models.Model):
@@ -39,50 +59,39 @@ class OccApto(models.Model):
     _description = 'Detalhes dos Apartamentos'
     _order = 'name'
     _table = 'occ_apto'
-    _sql_constraints = [('occ.apto', 'UNIQUE (name,bloco_id)',
-                         'Os nomes dos apartamentos devem ser '
-                         'únicos dentro de cada bloco')]
+    _sql_constraints = [('occ.apto', 'UNIQUE (name)',
+                         'Os nomes dos apartamentos devem ser únicos')]
     name = fields.Char('Apartamento', size=4, required=True)
+    numero = fields.Char('Número', size=4, required=True)
     morador_ids = fields.One2many('occ.morador', 'apto_id',
                                   'Moradores neste Apartamento')
-    bloco_id = fields.Many2one('occ.bloco', 'Bloco', ondelete="cascade",
-                               required=True)
-    vaga_id = fields.Many2one('occ.vaga', string='Vaga', required=True,
-                              domain="[('bloco_id','=',bloco_id)]")
+    bloco_id = fields.Many2one('occ.bloco', 'Bloco',
+                               ondelete="cascade", required=True)
+    vaga_carro_id = fields.Many2one('occ.vaga.carro', 'Vaga Carro',
+                                    domain="[('bloco_id','=',bloco_id)]")
+    vaga_moto_id = fields.Many2one('occ.vaga.moto', 'Vaga Moto',
+                                   domain="[('bloco_id','=',bloco_id)]")
 
 
-class OccMorador(models.Model):
-    _name = 'occ.morador'
-    _description = 'Detalhes dos Moradores'
+class OccTAG(models.Model):
+    _name = 'occ.tag'
+    _description = 'Detalhes das TAGs'
     _order = 'name'
-    _rec_name = 'name'
-    _table = 'occ_morador'
-    active = fields.Boolean('Ativo', default=True)
-    name = fields.Char('Morador', size=45, required=True)
-    image = fields.Binary('Foto')
-    rg = fields.Char('RG', size=10, require=True)
-    cpf = fields.Char('CPF', size=11, required=True)
-    veiculo_ids = fields.One2many('occ.veiculo', 'morador_id',
-                                  'Veículos deste morador')
-    bloco_id = fields.Many2one('occ.bloco', 'Bloco', ondelete="cascade",
-                               required=True)
-    apto_id = fields.Many2one('occ.apto', 'Apartamento', ondelete='cascade',
-                              required=True,
-                              domain="[('bloco_id','=',bloco_id)]")
-    ref_ids = fields.One2many('occ.moradorref', 'morador_id',
-                              'Contatos deste morador')
+    _table = 'occ_tag'
+    _sql_constraints = [('occ.tag', 'UNIQUE (name)',
+                         'As TAGs devem ser únicas')]
 
-
-class OccMoradorRef(models.Model):
-    _name = 'occ.moradorref'
-    _description = 'Contatos de Referência dos moradores'
-    _table = 'occ_moradorref'
     active = fields.Boolean('Ativo', default=True)
-    name = fields.Char('Nome', size=45, required=True)
-    fone = fields.Char('Telefone', size=10, required=True)
-    celular = fields.Char('Celular', size=11)
-    morador_id = fields.Many2one('occ.morador', 'Morador',
-                                 ondelete='cascade')
+    name = fields.Char(string='TAG', size=6, required=True)
+    tipo = fields.Selection([('carro', 'TAG Carro'), ('moto', 'TAG Moto')],
+                            "Tipo", default='carro', required=True)
+    veiculo_ids = fields.One2many('occ.veiculo', 'tag_id', 'Veículo')
+    vaga_carro_ids = fields.Many2many('occ.vaga.carro', 'occ_tag_carro_rel',
+                                      'tag_ids', 'vaga_carro_ids',
+                                      string='Vagas Carro')
+    vaga_moto_ids = fields.Many2many('occ.vaga.moto', 'occ_tag_moto_rel',
+                                     'tag_ids', 'vaga_moto_ids',
+                                     string='Vagas Moto')
 
 
 class OccVeiculo(models.Model):
@@ -94,27 +103,17 @@ class OccVeiculo(models.Model):
                          'Placa já cadastrada')]
     _sql_constraints = [('occ.veiculo', 'UNIQUE (name,tag_id)',
                          'Um veículo deve ter somente uma TAG ativa por vez')]
+    _sql_constraints = [('occ.veiculo', 'UNIQUE (tag_id)',
+                         'Tag já cadastrado')]
     active = fields.Boolean('Ativo', default=True)
     name = fields.Char(string='Placa', size=8, required=True)
-    tipo = fields.Selection([('carro', 'Carro'), ('moto', 'Moto')],
-                            "Tipo", default='carro', required=True)
+    tipo = fields.Selection([('carro', 'Carro'), ('moto', 'Moto')], "Tipo",
+                            default='carro', required=True)
     morador_id = fields.Many2one('occ.morador', 'Morador', ondelete="cascade",
                                  required=True)
-    tag_id = fields.Many2one('occ.tag', 'TAG', ondelete="cascade",
-                             required=True)
-
-
-class OccTAG(models.Model):
-    _name = 'occ.tag'
-    _description = 'Detalhes das TAGs'
-    _order = 'name'
-    _table = 'occ_tag'
-    _sql_constraints = [('occ.tag', 'UNIQUE (name)',
-                         'As TAGs devem ser únicas')]
-    active = fields.Boolean('Ativo', default=True)
-    name = fields.Char(string='TAG', size=46, required=True)
-    tipo = fields.Selection([('carro', 'TAG Carro'), ('moto', 'TAG Moto')],
-                            "Tipo", default='carro', required=True)
-    veiculo_ids = fields.Many2one('occ.veiculo', 'Placa', ondelete="cascade")
-    vaga_ids = fields.Many2many('occ.tag', 'occ_tag_rel', 'tag_id', 'vaga_id',
-                                string='TAGs', ondelete="cascade")
+    tag_id = fields.Many2one('occ.tag', 'TAG', required=True,
+                             domain="[('tipo','=',tipo)]")
+#    vaga_carro_ids = fields.Many2one('occ.vaga.carro', 'Vaga carro',
+#                                     domain="[('tipo','=',tipo)]")
+#    vaga_moto_ids = fields.Many2one('occ.vaga.carro', 'Vaga moto',
+#                                    domain="[('tipo','=',tipo)]")
