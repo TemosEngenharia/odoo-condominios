@@ -14,6 +14,19 @@
   		sequence="2"
   		action="action_occ_apto" />  	
   </data>
+  <record id="view_tree_occ_apto" model="ir.ui.view">
+  	<field name="name">Apartamento tree</field>
+  	<field name="model">occ.apto</field>
+  	<field  name="arch" type="xml">
+   		<tree editable="True">
+   			<field name="name"/>
+   			<field name="numero"/>
+   			<field name="bloco_id" widget="selection"/>
+   			<field name="vaga_carro_id" widget="selection"/>
+   			<field name="vaga_moto_id" widget="selection"/>
+    		</tree>
+   	</field>
+  </record>
   <record id="view_form_occ_apto" model="ir.ui.view">
   	<field name="name">Apartamento Form</field>
   	<field name="model">occ.apto</field>
@@ -26,17 +39,20 @@
 			  <group name="group_top">
       			<group name="group_left">
         			<field name="name"/>
+        			<field name="numero"/>
 	  				<field name="bloco_id"/>
-	  				<field name="morador_ids"/>
-	  				<field name="vaga_id"/>
       			</group>
       			<group name="group_right">
-					<!-- Aqui vai o conteúdo -->
+	  				<!-- Grupo Vazio -->
+      			</group>
+      			<group name="group_bottom">
+	  				<field name="vaga_carro_id"/>
+	  				<field name="vaga_moto_id"/>
+      				<field name="morador_ids"/>
       			</group>
     		  </group>
    			</sheet>
   		</form>
    	</field>
   </record>
-
 </openerp>

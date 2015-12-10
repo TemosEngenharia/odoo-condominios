@@ -18,11 +18,12 @@
     'website': "http://www.e2i9.com",
 
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
+    # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module
+    # /module_data.xml
     # for the full list
     'category': 'Specific Industry Applications',
     'version': '9.0.0.0.1',
-    
+
     'application': True,
 
     # any module necessary for this one to work correctly
@@ -39,12 +40,8 @@
         'views/occ_apto_view.xml',
         'views/occ_morador_view.xml',
         'views/occ_veiculo_view.xml',
-        'views/occ_vaga_view.xml',
+        'views/occ_vaga_carro_view.xml',
+        'views/occ_vaga_moto_view.xml',
         'views/occ_tag_view.xml',
-        #'templates.xml',
     ],
-    # only loaded in demonstration mode
-    #'demo': [
-    #    'demo.xml',
-    #],
 }
