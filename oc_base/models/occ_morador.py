@@ -34,6 +34,27 @@ class OccMorador(models.Model):
     ref_ids = fields.One2many('occ.moradorref', 'morador_id',
                               'Contatos deste morador')
 
+    @api.onchange('cpf')
+    def _onchange_cpf(self):
+        cpf = None
+        if self.cpf:
+            val = re.sub('[^0-9]', '', self.cpf)
+            if len(val) == 11:
+                cpf = "%s.%s.%s-%s" % (
+                    val[0:3], val[3:6], val[6:9], val[9:11])
+                self.cpf = cpf
+
+    @api.one
+    @api.constrains('cpf')
+    def _check_cpf(self):
+        result = True
+        if self.cpf:
+            if not cpf.validate_cpf(self.cpf):
+                result = False
+                document = 'CPF'
+            if not result:
+                raise ValidationError("{} Invalido!".format(document))
+
 
 class OccMoradorRef(models.Model):
     _name = 'occ.moradorref'
@@ -45,26 +66,3 @@ class OccMoradorRef(models.Model):
     celular = fields.Char('Celular', size=11)
     morador_id = fields.Many2one('occ.morador', 'Morador',
                                  ondelete='cascade')
-
-
-@api.onchange('cpf')
-def _onchange_cpf(self):
-    cpf = None
-    if self.cpf:
-        val = re.sub('[^0-9]', '', self.cpf)
-        if len(val) == 11:
-            cpf = "%s.%s.%s-%s" % (
-                val[0:3], val[3:6], val[6:9], val[9:11])
-        self.cpf = cpf
-
-
-@api.one
-@api.constrains('cpf')
-def _check_cpf(self):
-    result = True
-    if self.cpf:
-        if not cpf.validate_cpf(self.cpf):
-            result = False
-            document = 'CPF'
-    if not result:
-        raise ValidationError("{} Invalido!".format(document))
