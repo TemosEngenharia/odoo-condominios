@@ -1,51 +1,51 @@
 # -*- coding: utf-8 -*-
-from thread import * #@PydevCodeAnalysisIgnore
-import socket
+#@PydevCodeAnalysisIgnore
+from thread import *
 import sys
+import socket
 import binascii
-
-HOST = ''    # Symbolic name meaning all available interfaces
-PORT = 9870  # Arbitrary non-privileged port
+import struct
 
 
 def definition():
-    global data, msg
+    global data, hex_data, HOST, PORT, server
     data = None
-    msg = None
+    hex_data = None
+    HOST = '172.19.254.11'
+    PORT = 9870
+    a = HOST.split('.')
+    server = '0x{:02x}'.format(int(a[3], 10)) + '0x{:02x}'.format(int(a[2], 10)) + '0x{:02x}'.format(int(a[1], 10)) + '0x{:02x}'.format(int(a[0], 10))
+    server = server.replace('0x', '')
+
+
+def comPackageToSend(_start, _command, _cid, _tid, _param1, _param2, _param3,
+                     _errorcode, _extradata):
+    datagram = struct.pack('>BBHIIIQII', _start, _command, _cid, _tid, _param1,
+                           _param2, _param3, _errorcode, _extradata)
+    return datagram
+
+
+def comPackageReceived(_data):
+    datagrama = struct.unpack('>BBHIIIQII', _data)
+    return datagrama
 
 
 def comTerminalLogon():
     print "Logon do Terminal"
-    print '0x' + msg[0:2]
-    print '0x' + msg[2:4]
-    print '0x' + msg[6:8] + ' 0x' + msg[4:6]
-    TID = msg[14:16] + msg[12:14] + msg[10:12] + msg[8:10]
-    print int(TID, 16)
-    IPv4_a = int(msg[22:24], 16)
-    IPv4_b = int(msg[20:22], 16)
-    IPv4_c = int(msg[18:20], 16)
-    IPv4_d = int(msg[16:18], 16)
-    print IPv4_a, '.', IPv4_b,  '.', IPv4_c,  '.', IPv4_d
-    TMN = msg[30:32] + msg[28:30] + msg[26:28] + msg[24:26]
-    print int(TMN, 16)
-    print '[0] - ' + '0x' + msg[32:34]
-    print '[1] - ' + '0x' + msg[34:36]
-    print '[2] - ' + '0x' + msg[36:38]
-    print '[3] - ' + '0x' + msg[38:40]
-    print '[4] - ' + '0x' + msg[40:42]
-    print '[5] - ' + '0x' + msg[42:44]
-    print '[6] - ' + '0x' + msg[44:46]
-    print '[7] - ' + '0x' + msg[46:48]
-    print '0x' + msg[48:56]
-    print '0x' + msg[56:60]
-    print '0x' + msg[60:62]
-    print '0x' + msg[62:64]
-
-    # Sending message to connected client
-    conn.sendall(bytearray([0x21, 0x01, 0x00, 0x00, 0x4e, 0x61, 0xbc, 0x00,
-                            0x0b, 0xfe, 0x13, 0xac, 0x14, 0x00, 0x00, 0x00,
-                            0x03, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                            0x30, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00, 0x00]))
+    start = hex_data[0:2]
+    command = hex_data[2:4]
+    cid = hex_data[4:8]
+    tid = hex_data[8:16]
+    param1 = server
+    param2 = '0x0a000000'
+    param3 = hex_data[40:44]+'000000000000'
+    errorcode = hex_data[48:56]
+    extradata = '0x00'
+    replay = comPackageToSend(int(start, 16), int(command, 16), int(cid, 16),
+                              int(tid, 16), int(param1, 16), int(param2, 16),
+                              int(param3, 16), int(errorcode, 16),
+                              int(extradata, 16))
+    conn.sendall(replay)
 
 
 def comTerminalLogoff():
@@ -58,6 +58,21 @@ def comTCardSerialNReading():
 
 def comTimeSync():
     print "Sincronismo de Hora"
+    start = hex_data[0:2]
+    command = hex_data[2:4]
+    cid = hex_data[4:8]
+    tid = hex_data[8:16]
+    param1 = '0x00000000'
+    param2 = '0x00000000'
+    param3 = 
+    errorcode = hex_data[48:56]
+    extradata = '0x00'
+    replay = comPackageToSend(int(start, 16), int(command, 16), int(cid, 16),
+                              int(tid, 16), int(param1, 16), int(param2, 16),
+                              int(param3, 16), int(errorcode, 16),
+                              int(extradata, 16))
+    conn.sendall(replay)
+    
 
 
 def comSendingTerminalStatus():
@@ -227,11 +242,11 @@ def clientthread(conn):
     while True:
 
         # Receiving from client
-        global data, msg
-        data = conn.recv(4098)
-        msg = binascii.hexlify(data).decode()
+        global data, hex_data
+        data = conn.recv(1024)
 
-        opt = msg[2:4]
+        hex_data = binascii.hexlify(data).decode()
+        opt = hex_data[2:4]
         options[opt]()
         if not data:
             break
@@ -247,6 +262,6 @@ while 1:
 
     # start new thread takes 1st argument as a function name to be run,
     # second is the tuple of arguments to the function.
-    start_new_thread(clientthread, (conn, ))
+    start_new_thread(clientthread, (conn, ))  # @UndefinedVariable
 
 s.close()
