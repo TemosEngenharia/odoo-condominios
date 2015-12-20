@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import re
-
 from openerp import models, fields, api
 from openerp.exceptions import ValidationError
 from . import cpf
