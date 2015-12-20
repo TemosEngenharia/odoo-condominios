@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
-import re
 from openerp import models, fields, api
-from oc_base.models import oc_models
-from oc_base.models import occ_morador
-from oc_virdi.models import vd_packs
+
+
+class VirdiTAG(models.Model):
+    _inherit = 'occ.tag'
+
+    @api.depends('name')
+    def SearchTAG(self, tag):
+        if not self.search([('name', '=', tag)]):
+            return False
+        else:
+            return True
 
 
 class OccVirdi(models.Model):
@@ -29,5 +36,6 @@ class OccVirdiAcessos(models.Model):
     _description = 'Registros das tentitativas e sucessos de acesso'
     _order = 'data_acesso'
     _table = 'occ_virdiacessos'
-    name = fields.Boolean('Sucesso')
-    
+    status = fields.Selection([('autorizado', 'Acesso Liberado'),
+                               ('negado', 'Acesso Negado')],
+                              "Situação")
