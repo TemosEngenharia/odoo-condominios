@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
 <openerp>
   <data>
   	<!-- Action to open OCCadastro.Moradores -->
@@ -23,7 +24,7 @@
    			<field name="cpf"/>
    			<field name="rg"/>
    			<field name="fone"/>
-   			<field name="celular"/>	
+   			<field name="celular"/>
    			<field name="bloco_id" widget="selection"/>
    			<field name="apto_id" widget="selection"/>
    		</tree>

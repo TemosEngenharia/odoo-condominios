@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
 <openerp>
   <data>
   	<!-- Action to open OCCadastro.Vaga -->
@@ -16,7 +17,7 @@
    			<field name="tipo" widget="selection"/>
    			<field name="morador_id"/>
    			<field name="tag_id"/>
-<!--  
+<!-- 
 			<field name="vaga_carro_ids" attrs="{'invisible': [('tipo','=', 'moto')]}"/>
 	  		<field name="vaga_moto_ids" attrs="{'invisible': [('tipo','=', 'carro')]}"/>
 -->

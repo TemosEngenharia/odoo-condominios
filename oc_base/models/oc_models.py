@@ -34,7 +34,10 @@ class OccVagaCarro(models.Model):
     tag_ids = fields.Many2many('occ.tag', 'occ_tag_carro_rel',
                                'vaga_carro_ids', 'tag_ids',
                                string='TAGs')
-#    veiculo_ids = fields.One2many('occ.veiculo', 'vaga_carro_ids', 'Carro')
+    status = fields.Boolean('Status', default=True)
+"""    veiculo_ids = fields.Many2many('occ.tag', 'occ_tag_carro_rel',
+                                   'vaga_carro_ids', 'tag_ids',
+                                   string='TAGs')"""
 
 
 class OccVagaMoto(models.Model):
@@ -51,7 +54,10 @@ class OccVagaMoto(models.Model):
     tag_ids = fields.Many2many('occ.tag', 'occ_tag_moto_rel',
                                'vaga_moto_ids', 'tag_ids',
                                string='TAGs')
-#    veiculo_ids = fields.One2many('occ.veiculo', 'vaga_moto_ids', 'Moto')
+    status = fields.Boolean('Status', default=True)
+"""    veiculo_ids = fields.Many2many('occ.tag', 'occ_tag_moto_rel',
+                                   'vaga_moto_ids', 'tag_ids',
+                                   string='TAGs')"""
 
 
 class OccApto(models.Model):
@@ -113,7 +119,16 @@ class OccVeiculo(models.Model):
                                  required=True)
     tag_id = fields.Many2one('occ.tag', 'TAG', required=True,
                              domain="[('tipo','=',tipo)]")
-#    vaga_carro_ids = fields.Many2one('occ.vaga.carro', 'Vaga carro',
-#                                     domain="[('tipo','=',tipo)]")
-#    vaga_moto_ids = fields.Many2one('occ.vaga.carro', 'Vaga moto',
-#                                    domain="[('tipo','=',tipo)]")
+    status = fields.Boolean('Status', default=False)
+"""
+    vaga_carro_ids = fields.Many2many('occ.vaga.carro', 'occ_tag_carro_rel',
+                                      'tag_ids', 'tag_id',
+                                      string='Vagas', readonly=True,
+                                      domain="[('tipo','=',tipo), \
+                                      ('tag_id','=',tag_ids]")
+    vaga_moto_ids = fields.Many2many('occ.vaga.moto', 'occ_tag_moto_rel',
+                                     'tag_ids', 'tag_id',
+                                     string='Vagas', readonly=True,
+                                     domain="[('tipo','=',tipo), \
+                                     ('tag_id','=',tag_ids]")
+"""

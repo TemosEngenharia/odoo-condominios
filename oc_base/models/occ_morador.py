@@ -21,8 +21,8 @@ class OccMorador(models.Model):
     image = fields.Binary('Foto')
     rg = fields.Char('RG', size=15)
     cpf = fields.Char('CPF', size=15)
-    fone = fields.Char('Telefone', size=10)
-    celular = fields.Char('Celular', size=11)
+    fone = fields.Char('Telefone', size=18)
+    celular = fields.Char('Celular', size=18)
     veiculo_ids = fields.One2many('occ.veiculo', 'morador_id',
                                   'Veículos deste morador')
     bloco_id = fields.Many2one('occ.bloco', 'Bloco',
@@ -32,6 +32,10 @@ class OccMorador(models.Model):
                               domain="[('bloco_id','=',bloco_id)]")
     ref_ids = fields.One2many('occ.moradorref', 'morador_id',
                               'Contatos deste morador')
+    total_vagas_carro = fields.Integer('total_vagas_carro')
+    total_vagas_moto = fields.Integer('total_vagas_moto')
+    dispo_vagas_carro = fields.Integer('dispo_vagas_carro')
+    dispo_vagas_moto = fields.Integer('dispo_vagas_moto')
 
     @api.onchange('cpf')
     def _onchange_cpf(self):
@@ -43,6 +47,18 @@ class OccMorador(models.Model):
                     val[0:3], val[3:6], val[6:9], val[9:11])
                 self.cpf = cpf
 
+    @api.onchange('celular')
+    def _onchange_celular(self):
+        celular = None
+        if self.celular:
+            val = re.sub('[^0-9]', '', self.celular)
+            if len(val) == 11:
+                celular = "%s-%s.%s.%s" % (val[0:2], val[2:5], val[5:8],
+                                           val[8:11])
+            if len(val) == 9:
+                celular = "15-%s.%s.%s" % (val[0:3], val[3:6], val[6:9])
+            self.celular = celular
+
     @api.one
     @api.constrains('cpf')
     def _check_cpf(self):
@@ -52,7 +68,7 @@ class OccMorador(models.Model):
                 result = False
                 document = 'CPF'
             if not result:
-                raise ValidationError("{} Invalido!".format(document))
+                raise ValidationError("{} Inválido!".format(document))
 
 
 class OccMoradorRef(models.Model):
