@@ -12,15 +12,11 @@
   	<field name="name">Veiculo tree</field>
   	<field name="model">occ.veiculo</field>
   	<field  name="arch" type="xml">
-   		<tree editable="True">
+   		<tree>
    			<field name="name"/>
    			<field name="tipo" widget="selection"/>
    			<field name="morador_id"/>
-   			<field name="tag_id"/>
-<!-- 
-			<field name="vaga_carro_ids" attrs="{'invisible': [('tipo','=', 'moto')]}"/>
-	  		<field name="vaga_moto_ids" attrs="{'invisible': [('tipo','=', 'carro')]}"/>
--->
+   			<field name="status"/>
    		</tree>
    	</field>
   </record>
@@ -37,11 +33,11 @@
       			<group name="group_left">
         			<field name="name"/>
 	  				<field name="tipo" widget="radio"/>
-	  				<field name="tag_id"/>
+		   			<field name="status" widget="radio"/>
+	   				<field name="tag_id"/>
 	  				<field name="morador_id"/>
       			</group>
       			<group name="group_right">
-
       			</group>
     		  </group>
    			</sheet>

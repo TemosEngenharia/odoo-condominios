@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<act_window id="action_occ_virdi"
+  		name="Registro de Terminais"
+  		res_model="occ.virdi"
+  		view_mode="tree,form"/>
+  	<menuitem id="menu_occ_virdi"
+  		name="AC-1000"
+  		parent="oc_base.oc_Terminais"
+  		sequence="1"
+  		action="action_occ_virdi" />  	
+  </data>
+<!--
+  <record id="view_tree_occ_virdi" model="ir.ui.view">
+  	<field name="name">Terminais tree</field>
+  	<field name="model">occ.virdi</field>
+  	<field  name="arch" type="xml">
+   		<tree>
+   			<field name="terminal_id"/>
+   			<field name="terminal_ip"/>
+   			<field name="terminal_port"/>
+    	</tree>
+   	</field>
+  </record>
+-->
+  <record id="view_form_occ_virdi" model="ir.ui.view">
+  	<field name="name">Terminais Form</field>
+  	<field name="model">occ.virdi</field>
+  	<field  name="arch" type="xml">
+   		<form string="Terminal">
+   			<header>
+   				<button name="do_open_lock" type="object" string="Abrir cancela" class="oe_highlight" />
+   			</header>
+   			<sheet>
+			  <group name="group_top">
+       			<field name="terminal_id"/>
+       			<field name="terminal_ip"/>
+  				<field name="terminal_port"/>
+    		  </group>
+   			</sheet>
+  		</form>
+   	</field>
+  </record>
+</openerp>

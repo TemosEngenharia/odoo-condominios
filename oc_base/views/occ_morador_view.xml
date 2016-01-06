@@ -19,17 +19,18 @@
   	<field name="name">Morador tree</field>
   	<field name="model">occ.morador</field>
   	<field  name="arch" type="xml">
-   		<tree editable="True">
+   		<tree>
    			<field name="name"/>
    			<field name="cpf"/>
    			<field name="rg"/>
    			<field name="fone"/>
    			<field name="celular"/>
-   			<field name="bloco_id" widget="selection"/>
-   			<field name="apto_id" widget="selection"/>
+   			<field name="bloco_id"/>
+   			<field name="apto_id"/>
    		</tree>
    	</field>
-  </record>  <record id="view_form_occ_morador" model="ir.ui.view">
+  </record>
+  <record id="view_form_occ_morador" model="ir.ui.view">
   	<field name="name">Morador Form</field>
   	<field name="model">occ.morador</field>
   	<field  name="arch" type="xml">
@@ -40,7 +41,9 @@
    			<sheet>
 			  <group name="group_top">
       			<group name="group_left">
-			   		<field name="image" widget="image"/>
+			   		<field name="image" widget="image" nolabel="1"/>
+			   	</group>
+			   	<group name="group_right">
         			<field name="name" label="Nome completo"/>
         			<field name="cpf"/>
         			<field name="rg"/>
@@ -49,9 +52,21 @@
         			<field name="bloco_id" widget="selection"/>
 	  				<field name="apto_id" widget="selection"/>
       			</group>
-      			<group name="group_right">
-	  				<field name="veiculo_ids" nolabel="1"/>
-      			</group>
+    		  </group>
+    		  <group name="group_botton">
+    		  	<notebook>
+	  				<page string="Veículos">
+	  					<field name="veiculo_ids" nolabel="1"/>
+	  				</page>
+	  				<page string="Vagas">
+	  					<group>
+		  					<field name="total_vagas_carro" string="Total de vagas para carros" readonly="1"/>
+		  					<field name="total_vagas_moto" string="Total de vagas para motos" readonly="1"/>
+	  						<field name="dispo_vagas_carro" string="Vagas disponíveis para carros" readonly="1"/>
+	  						<field name="dispo_vagas_moto" string="Vagas disponíveis para motos" readonly="1"/>
+	  					</group>
+	  				</page>
+	  			</notebook>
     		  </group>
    			</sheet>
   		</form>

@@ -18,8 +18,8 @@
   		parent="oc_Adm"
   		sequence="20"/> -->
   	<!-- Criação do Menu Controladoras -->
-  	<menuitem id="oc_Controlers"
-  		name="Controladoras"
+  	<menuitem id="oc_Terminais"
+  		name="Terminais"
   		parent="oc_Adm"
   		sequence="30"/>
   </data>

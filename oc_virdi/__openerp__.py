@@ -26,6 +26,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+             'views/occ_virdi.xml'
+             # 'security/ir.model.access.csv',
     ],
 }

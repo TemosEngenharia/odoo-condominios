@@ -6,7 +6,7 @@
   	<act_window id="action_occ_vaga" name="Registro de Vaga" res_model="occ.vaga" view_mode="tree,form"/>
 
   	<!-- Menu item to open OCCadastro Vaga -->
-  	<menuitem id="menu_occ_vaga" name="Vaga" parent="oc_Register" sequence="4" action="action_occ_vaga"/>
+  	<menuitem id="menu_occ_vaga" name="Vaga" parent="oc_Terminais" sequence="4" action="action_occ_vaga"/>
   </data>
   <record id="view_tree_occ_vaga" model="ir.ui.view">
   	<field name="name">Vaga tree</field>

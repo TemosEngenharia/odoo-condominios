@@ -2,40 +2,17 @@
 from openerp import models, fields, api
 
 
-class VirdiTAG(models.Model):
-    _inherit = 'occ.tag'
-
-    @api.depends('name')
-    def SearchTAG(self, tag):
-        if not self.search([('name', '=', tag)]):
-            return False
-        else:
-            return True
-
-
-class OccVirdi(models.Model):
+class VirdiTerminais(models.Model):
     _name = 'occ.virdi'
-    _description = 'Detalhes das Controladoras'
-    _order = 'name'
+    _description = 'Equipamentos Virdi'
+    _order = 'terminal_id'
     _table = 'occ_virdi'
-    _sql_constraints = [
-                        ('occ.virdi', 'unique (name)',
-                         'Já existe uma controladora com este ID!')
-                       ]
-    name = fields.Char('ID', size=8, required=True)
-    ip_addr = fields.Char('IP', size=12, require=True)
-    modelo = fields.Char('Modelo', size=4, require=True)
-    local = fields.Selection([('gate_morador', 'Portão Morador'),
-                              ('cancela_entrada', 'Cancela de Entrada'),
-                              ('cancela_saida', 'Cancela de Saída')],
-                             "Local", default='gate_morador', require=True)
+    terminal_id = fields.Char('ID do terminal', size=8, required=True)
+    terminal_ip = fields.Char('IP do terminal', size=15, require=True)
+    terminal_port = fields.Char('Porta socket terminal', size=5, require=True)
+    terminal_status = fields.Boolean('Cancela', default=True)
 
-
-class OccVirdiAcessos(models.Model):
-    _name = 'occ.virdiacessos'
-    _description = 'Registros das tentitativas e sucessos de acesso'
-    _order = 'data_acesso'
-    _table = 'occ_virdiacessos'
-    status = fields.Selection([('autorizado', 'Acesso Liberado'),
-                               ('negado', 'Acesso Negado')],
-                              "Situação")
+    @api.multi
+    def do_open_lock(self):
+        self.terminal_status = False
+        return True
