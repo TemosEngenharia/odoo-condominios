@@ -34,7 +34,7 @@ class OccVagaCarro(models.Model):
     tag_ids = fields.Many2many('occ.tag', 'occ_tag_carro_rel',
                                'vaga_carro_ids', 'tag_ids',
                                string='TAGs')
-#    veiculo_ids = fields.One2many('occ.veiculo', 'vaga_carro_ids', 'Carro')
+    status = fields.Boolean('Status', default=True)
 
 
 class OccVagaMoto(models.Model):
@@ -51,7 +51,7 @@ class OccVagaMoto(models.Model):
     tag_ids = fields.Many2many('occ.tag', 'occ_tag_moto_rel',
                                'vaga_moto_ids', 'tag_ids',
                                string='TAGs')
-#    veiculo_ids = fields.One2many('occ.veiculo', 'vaga_moto_ids', 'Moto')
+    status = fields.Boolean('Status', default=True)
 
 
 class OccApto(models.Model):
@@ -113,7 +113,5 @@ class OccVeiculo(models.Model):
                                  required=True)
     tag_id = fields.Many2one('occ.tag', 'TAG', required=True,
                              domain="[('tipo','=',tipo)]")
-#    vaga_carro_ids = fields.Many2one('occ.vaga.carro', 'Vaga carro',
-#                                     domain="[('tipo','=',tipo)]")
-#    vaga_moto_ids = fields.Many2one('occ.vaga.carro', 'Vaga moto',
-#                                    domain="[('tipo','=',tipo)]")
+    status = fields.Selection([('vaga', 'Na vaga'), ('fora', 'Na rua')],
+                              "Situação", default='vaga', required=True)

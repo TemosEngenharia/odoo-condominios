@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
 <openerp>
   <data>
   	<!-- Action to open OCCadastro.Apto -->
@@ -14,6 +15,7 @@
   		sequence="2"
   		action="action_occ_apto" />  	
   </data>
+<!-- 
   <record id="view_tree_occ_apto" model="ir.ui.view">
   	<field name="name">Apartamento tree</field>
   	<field name="model">occ.apto</field>
@@ -24,9 +26,10 @@
    			<field name="bloco_id" widget="selection"/>
    			<field name="vaga_carro_id" widget="selection"/>
    			<field name="vaga_moto_id" widget="selection"/>
-    		</tree>
+    	</tree>
    	</field>
   </record>
+-->  
   <record id="view_form_occ_apto" model="ir.ui.view">
   	<field name="name">Apartamento Form</field>
   	<field name="model">occ.apto</field>
