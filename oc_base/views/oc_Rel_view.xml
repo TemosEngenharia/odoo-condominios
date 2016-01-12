@@ -6,6 +6,7 @@
   	<menuitem id="oc_Acessos"
   		name="Log dos Acessos"
   		parent="oc_Rel"
-  		sequence="0"/>
+  		sequence="0"
+  		groups="group_occ_manager,group_occ_user"/>
   </data>
 </openerp>

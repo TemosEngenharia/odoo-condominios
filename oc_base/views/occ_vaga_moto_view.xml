@@ -6,11 +6,12 @@
   	<act_window id="action_occ_vaga_moto" name="Registro de Vagas Motos" res_model="occ.vaga.moto" view_mode="tree,form"/>
 
   	<!-- Menu item to open OCCadastro Vaga -->
-  	<menuitem id="menu_occ_vaga_moto" name="Vagas Motos" parent="oc_Register_Vagas" sequence="2" action="action_occ_vaga_moto"/>
+  	<menuitem id="menu_occ_vaga_moto" name="Vagas Motos" parent="oc_Register_Vagas" sequence="2" action="action_occ_vaga_moto" groups="group_occ_manager,group_occ_user"/>
   </data>
   <record id="view_tree_occ_vaga_moto" model="ir.ui.view">
   	<field name="name">Vaga Moto tree</field>
   	<field name="model">occ.vaga.moto</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
    		<tree editable="True">
    			<field name="name"/>
@@ -22,6 +23,7 @@
   <record id="view_form_occ_vaga_moto" model="ir.ui.view">
   	<field name="name">Vaga Moto Form</field>
   	<field name="model">occ.vaga.moto</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
    		<form string="Vaga Moto">
    			<header>

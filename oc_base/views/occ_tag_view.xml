@@ -6,11 +6,12 @@
   	<act_window id="action_occ_tag" name="Registro de TAG" res_model="occ.tag" view_mode="tree,form"/>
 
   	<!-- Menu item to open OCCadastro TAG -->
-  	<menuitem id="menu_occ_tag" name="TAG" parent="oc_Register" sequence="6" action="action_occ_tag" />
+  	<menuitem id="menu_occ_tag" name="TAG" parent="oc_Register" sequence="6" action="action_occ_tag" groups="group_occ_manager,group_occ_user"/>
   </data>
   <record id="view_tree_occ_tag" model="ir.ui.view">
   	<field name="name">TAG tree</field>
   	<field name="model">occ.tag</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
    		<tree editable="True">
    			<field name="name"/>
@@ -24,6 +25,7 @@
   <record id="view_form_occ_tag" model="ir.ui.view">
   	<field name="name">TAG Form</field>
   	<field name="model">occ.tag</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
    		<form string="Detalhes da TAG">
    			<header>

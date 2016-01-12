@@ -6,12 +6,14 @@
   	<menuitem id="oc_User"
   		name="Usuários"
   		parent="oc_Adm"
-  		sequence="0"/>
+  		sequence="0"
+  		groups="group_occ_manager,group_occ_user"/>
   	<!-- Criação do Menu Perfis -->
   	<menuitem id="oc_Group"
   		name="Perfis"
   		parent="oc_Adm"
-  		sequence="10"/>
+  		sequence="10"
+  		groups="group_occ_manager,group_occ_user"/>
   	<!-- Criação do Menu Calendários
   	<menuitem id="oc_Calendar"
   		name="Calendários"
@@ -21,6 +23,7 @@
   	<menuitem id="oc_Terminais"
   		name="Terminais"
   		parent="oc_Adm"
-  		sequence="30"/>
+  		sequence="30"
+  		groups="group_occ_manager,group_occ_user"/>
   </data>
 </openerp>
