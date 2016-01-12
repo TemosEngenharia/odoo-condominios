@@ -22,10 +22,5 @@
   		name="Relatórios"
   		parent="oc_Opr"
   		sequence="30"/>
-  	<!-- Criação do Menu Controles -->
-  	<menuitem id="oc_Control"
-  		name="Controles"
-  		parent="oc_Opr"
-  		sequence="40"/>
   </data>
 </openerp>
