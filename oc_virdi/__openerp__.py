@@ -26,8 +26,9 @@
 
     # always loaded
     'data': [
+             'security/oc_virdi_security.xml',
+             'security/ir.model.access.csv',
              'views/occ_virdi.xml',
              'views/occ_acesso.xml'
-             # 'security/ir.model.access.csv',
-    ],
+            ],
 }

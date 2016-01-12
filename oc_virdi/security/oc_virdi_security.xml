@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<record id="group_occ_manager" model="res.groups">
+  		<field name="name">Reserva / Administradores Virdi</field>
+  	</record>
+    	<record id="group_occ_user" model="res.groups">
+  		<field name="name">Reserva / Usuarios Virdi</field>
+  	</record>	
+  </data>
+</openerp>
