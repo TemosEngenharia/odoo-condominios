@@ -13,11 +13,13 @@
   		name="Morador"
   		parent="oc_Register"
   		sequence="3"
-  		action="action_occ_morador" />  	
+  		action="action_occ_morador"
+  		groups="group_occ_manager,group_occ_user"/>  	
   </data>
   <record id="view_tree_occ_morador" model="ir.ui.view">
   	<field name="name">Morador tree</field>
   	<field name="model">occ.morador</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
    		<tree>
    			<field name="name"/>
@@ -33,6 +35,7 @@
   <record id="view_form_occ_morador" model="ir.ui.view">
   	<field name="name">Morador Form</field>
   	<field name="model">occ.morador</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
    		<form string="Morador">
    			<header>

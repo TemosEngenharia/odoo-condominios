@@ -15,6 +15,7 @@
   		parent="oc_base.oc_Terminais"
   		sequence="1"
   		action="action_occ_virdi"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"
   	/>
   </data>
   
@@ -22,6 +23,7 @@
   	<field name="name">view_tree_occ_virdi</field>
   	<field name="model">occ.virdi</field>
   	<field name="type">tree</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
    		<tree string="occ.object.tree">
    			<field name="terminal_id" readonly="1"/>
@@ -34,7 +36,7 @@
   	<field name="name">view_form_occ_virdi</field>
   	<field name="model">occ.virdi</field>
   	<field name="type">form</field>
-  	<field name="res_id">1</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
    		<form string="occ.object.form">
    			<header>

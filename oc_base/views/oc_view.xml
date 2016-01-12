@@ -3,10 +3,10 @@
 <openerp>
   <data>
   	<!-- Criação do Menu Administração -->
-  	<menuitem id="oc_Adm" name="Adminstração"/>  	
+  	<menuitem id="oc_Adm" name="Adminstração" groups="group_occ_manager,group_occ_user"/>  	
   	<!-- Criação do Menu Operação -->
-  	<menuitem id="oc_Opr" name="Operação"/>
+  	<menuitem id="oc_Opr" name="Operação" groups="group_occ_manager,group_occ_user"/>
   	<!-- Criação do Menu Ajuda -->
-  	<menuitem id="oc_Hlp" name="Ajuda"/>  	
+  	<menuitem id="oc_Hlp" name="Ajuda" groups="group_occ_manager,group_occ_user"/>  	
   </data>
 </openerp>

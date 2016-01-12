@@ -6,12 +6,14 @@
   	<menuitem id="oc_Register"
   		name="Cadastro"
   		parent="oc_Opr"
-  		sequence="0"/>
+  		sequence="0"
+  		groups="group_occ_manager,group_occ_user"/>
   	<!-- Criação do Menu Cadastro de Vagas -->
   	<menuitem id="oc_Register_Vagas"
   		name="Vagas"
   		parent="oc_Register"
-  		sequence="4"/>
+  		sequence="4"
+  		groups="group_occ_manager,group_occ_user"/>
   	<!-- Criação do Menu Agenda
   	<menuitem id="oc_Agenda"
   		name="Agenda"
@@ -21,6 +23,7 @@
   	<menuitem id="oc_Reports"
   		name="Relatórios"
   		parent="oc_Opr"
-  		sequence="30"/>
+  		sequence="30"
+  		groups="group_occ_manager,group_occ_user"/>
   </data>
 </openerp>
