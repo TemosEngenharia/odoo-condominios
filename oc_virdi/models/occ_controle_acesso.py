@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields
-from __builtin__ import True
+from openerp import models, fields, api
 
 
 class VirdiTerminais(models.Model):
@@ -19,31 +18,39 @@ class VirdiTerminais(models.Model):
                                        "Estado", default='close',
                                        required=True)
 
+    @api.multi
+    def do_open_lock(self):
+        self.terminal_status = 'open'
+        return True
+
 
 class ControleAcesso(models.Model):
     _name = 'occ.controle.acesso'
     _description = 'Tabela de Controle de Acesso'
     _table = 'occ_controle_acesso'
-    horario = fields.Char('Horário', required=True)
+    horario = fields.Char('Horário')
     sentido = fields.Selection([('in', 'Entrada'), ('out', 'Saída')],
-                               "Sentido", default='in',
-                               required=True)
-    morador = fields.Many2one('occ.morador', 'Morador',
-                              required=True)
-    placa = fields.Many2one('occ.veiculos', 'Placa',
-                            required=True)
-    status = fields.Char('Situação', required=True)
+                               "Sentido", default='in')
+    morador = fields.Many2one('occ.morador', 'Morador')
+    placa = fields.Many2one('occ.veiculo', 'Placa')
+    status = fields.Char('Situação')
 
-    def abrir_cancela_entrada(self):
-        self.env.invalidate_all()
-        self.env.cr.execute("UPDATE occ_virdi SET terminal_status = 'open' \
-                            WHERE terminal_tipo = 'in'")
-        self.env.invalidate_all()
+    def abrir_cancela_entrada(a, b, c, d, e):  # @NoSelf
+        import psycopg2.extensions
+        psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
+        psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
+        with psycopg2.connect(database="reserva", user="cezar") as conn_pg:
+            with conn_pg.cursor() as conn_pgs:
+                conn_pgs.execute("update occ_virdi SET terminal_status = 'open' \
+                                 where terminal_tipo = 'in';")
         return True
 
-    def abrir_cancela_saida(self):
-        self.env.invalidate_all()
-        self.env.cr.execute("UPDATE occ_virdi SET terminal_status = 'open' \
-                            WHERE terminal_tipo = 'out'")
-        self.env.invalidate_all()
+    def abrir_cancela_saida(a, b, c, d, e):  # @NoSelf
+        import psycopg2.extensions
+        psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
+        psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
+        with psycopg2.connect(database="reserva", user="cezar") as conn_pg:
+            with conn_pg.cursor() as conn_pgs:
+                conn_pgs.execute("update occ_virdi SET terminal_status = 'open' \
+                                 where terminal_tipo = 'out';")
         return True

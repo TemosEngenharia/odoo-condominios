@@ -41,11 +41,11 @@
    			</header>
    			<sheet>
 			  <group name="group_top">
-   				<field name="horario" readonly="1"/>
-   				<field name="sentido" readonly="1"/>
-   				<field name="morador" readonly="1"/>
-   				<field name="placa" readonly="1"/>
-   				<field name="status" readonly="1"/>
+   				<field name="horario"/>
+   				<field name="sentido"/>
+   				<field name="morador"/>
+   				<field name="placa"/>
+   				<field name="status"/>
     		  </group>
    			</sheet>
   		</form>
