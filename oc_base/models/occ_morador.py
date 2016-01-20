@@ -55,9 +55,17 @@ class OccMorador(models.Model):
             if len(val) == 11:
                 celular = "%s-%s.%s.%s" % (val[0:2], val[2:5], val[5:8],
                                            val[8:11])
-            if len(val) == 9:
-                celular = "15-%s.%s.%s" % (val[0:3], val[3:6], val[6:9])
             self.celular = celular
+
+    @api.onchange('fone')
+    def _onchange_fone(self):
+        fone = None
+        if self.fone:
+            val = re.sub('[^0-9]', '', self.fone)
+            if len(val) == 10:
+                fone = "%s-%s.%s.%s" % (val[0:2], val[2:6], val[6:10])
+
+            self.fone = fone
 
     @api.one
     @api.constrains('cpf')
