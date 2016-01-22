@@ -28,6 +28,7 @@ class ControleAcesso(models.Model):
     _name = 'occ.controle.acesso'
     _description = 'Tabela de Controle de Acesso'
     _table = 'occ_controle_acesso'
+    _order = 'horario desc'
     horario = fields.Char('Horário')
     sentido = fields.Selection([('in', 'Entrada'), ('out', 'Saída')],
                                "Sentido", default='in')
@@ -39,7 +40,7 @@ class ControleAcesso(models.Model):
         import psycopg2.extensions
         psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
         psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
-        with psycopg2.connect(database="reserva", user="cezar") as conn_pg:
+        with psycopg2.connect(database="reserva", user="e2i9") as conn_pg:
             with conn_pg.cursor() as conn_pgs:
                 conn_pgs.execute("update occ_virdi SET terminal_status = 'open' \
                                  where terminal_tipo = 'in';")
@@ -49,7 +50,7 @@ class ControleAcesso(models.Model):
         import psycopg2.extensions
         psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
         psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
-        with psycopg2.connect(database="reserva", user="cezar") as conn_pg:
+        with psycopg2.connect(database="reserva", user="e2i9") as conn_pg:
             with conn_pg.cursor() as conn_pgs:
                 conn_pgs.execute("update occ_virdi SET terminal_status = 'open' \
                                  where terminal_tipo = 'out';")

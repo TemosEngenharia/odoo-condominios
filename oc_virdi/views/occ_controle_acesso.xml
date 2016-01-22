@@ -29,24 +29,37 @@
    	</field>
   </record>
 
+  <record id="view_search_occ_controle_acesso" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_acesso</field>
+        <field name="model">occ.controle.acesso</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="morador"/>
+                        <field name="placa"/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+                        <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                </search>
+        </field>
+  </record>
+
   <record id="view_form_occ_controle_acesso" model="ir.ui.view">
   	<field name="name">view_form_occ_controle_acesso</field>
   	<field name="model">occ.controle.acesso</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
-  	<field  name="arch" type="xml">
+  	<field name="arch" type="xml">
    		<form string="Cotrole de Acesso">
    			<header>
-   				<button name="abrir_cancela_entrada" type="object" string="Liberar entrada" class="oe_highlight" />
-   				<button name="abrir_cancela_saida" type="object" string="Liberar Saída" class="oe_highlight" />
+   				<button name="abrir_cancela_entrada" type="object" string="Liberar entrada" class="oe_highlight, oe_edit_only" />
+   				<button name="abrir_cancela_saida" type="object" string="Liberar Saída" class="oe_highlight, oe_edit_only" />
    			</header>
    			<sheet>
-			  <group name="group_top">
-   				<field name="horario"/>
-   				<field name="sentido"/>
-   				<field name="morador"/>
-   				<field name="placa"/>
-   				<field name="status"/>
-    		  </group>
+                                <group name="group_top">
+   			            <field name="horario"/>
+   			            <field name="sentido"/>
+   			            <field name="morador"/>
+   			            <field name="placa"/>
+   			            <field name="status"/>
+                                </group>
    			</sheet>
   		</form>
    	</field>
