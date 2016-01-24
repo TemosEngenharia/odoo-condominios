@@ -9,6 +9,7 @@ class OccBloco(models.Model):
     _table = 'occ_bloco'
     _sql_constraints = [('occ.bloco', 'UNIQUE (name)',
                          'Os nomes dos blocos devem ser únicos')]
+    active = fields.Boolean('Ativo', default=True)
     name = fields.Char('Bloco', size=4, required=True)
     apto_ids = fields.One2many('occ.apto', 'bloco_id',
                                'Apartamentos neste bloco')
@@ -27,6 +28,7 @@ class OccVagaCarro(models.Model):
     _table = 'occ_vaga_carro'
     _sql_constraints = [('occ.vaga.carro', 'UNIQUE (name)',
                          'Os nomes das vagas devem ser únicos')]
+    active = fields.Boolean('Ativo', default=True)
     name = fields.Char(string='Vaga Carro', size=4, required=True)
     bloco_id = fields.Many2one('occ.bloco', 'Bloco', required=True)
     apto_id = fields.Many2one('occ.apto', 'Apartamento',
@@ -44,6 +46,7 @@ class OccVagaMoto(models.Model):
     _table = 'occ_vaga_moto'
     _sql_constraints = [('occ.vaga.moto', 'UNIQUE (name)',
                          'Os nomes das vagas devem ser únicos')]
+    active = fields.Boolean('Ativo', default=True)
     name = fields.Char(string='Vaga Moto', size=4, required=True)
     bloco_id = fields.Many2one('occ.bloco', 'Bloco', required=True)
     apto_id = fields.Many2one('occ.apto', 'Apartamento',
@@ -61,6 +64,7 @@ class OccApto(models.Model):
     _table = 'occ_apto'
     _sql_constraints = [('occ.apto', 'UNIQUE (name)',
                          'Os nomes dos apartamentos devem ser únicos')]
+    active = fields.Boolean('Ativo', default=True)
     name = fields.Char('Apartamento', size=4, required=True)
     numero = fields.Char('Número', size=4, required=True)
     morador_ids = fields.One2many('occ.morador', 'apto_id',
@@ -80,7 +84,6 @@ class OccTAG(models.Model):
     _table = 'occ_tag'
     _sql_constraints = [('occ.tag', 'UNIQUE (name)',
                          'As TAGs devem ser únicas')]
-
     active = fields.Boolean('Ativo', default=True)
     name = fields.Char(string='TAG', size=6, required=True)
     tipo = fields.Selection([('carro', 'TAG Carro'), ('moto', 'TAG Moto')],

@@ -1,5 +1,7 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-manager_occ_acesso,manager_occ_acesso,model_occ_acesso,group_occ_manager_virdi,1,0,0,0
+manager_occ_controle_acesso,manager_occ_controle_acesso,model_occ_controle_acesso,group_occ_manager_virdi,1,0,1,0
+manager_occ_acesso,manager_occ_acesso,model_occ_acesso,group_occ_manager_virdi,1,1,0,0
 manager_occ_virdi,manager_occ_virdi,model_occ_virdi,group_occ_manager_virdi,1,1,0,0
+access_occ_controle_acesso,access_occ_controle_acesso,model_occ_controle_acesso,group_occ_manager_virdi,1,0,1,0
 access_occ_acesso,access_occ_acesso,model_occ_acesso,group_occ_user_virdi,1,0,0,0
 access_occ_virdi,access_occ_virdi,model_occ_virdi,group_occ_user_virdi,1,1,0,0
