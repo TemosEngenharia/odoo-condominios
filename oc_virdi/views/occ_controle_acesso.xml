@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<act_window id="action_occ_controle_acesso"
+  		name="Registro Controle de Acesso"
+  		res_model="occ.controle.acesso"
+  		view_mode="tree,form"/>
+  	<menuitem id="menu_occ_controle_acesso"
+  		name="Controle de Acesso"
+  		parent="oc_base.oc_Reports"
+  		sequence="2"
+  		action="action_occ_controle_acesso"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  </data>
+  
+  <record id="view_tree_occ_controle_acesso" model="ir.ui.view">
+  	<field name="name">view_tree_occ_controle_acesso</field>
+  	<field name="model">occ.controle.acesso</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field  name="arch" type="xml">
+   		<tree create="false">
+   			<field name="horario" readonly="1"/>
+   			<field name="sentido" readonly="1"/>
+   			<field name="morador" readonly="1"/>
+   			<field name="placa" readonly="1"/>
+   			<field name="status" readonly="1"/>
+    	</tree>
+   	</field>
+  </record>
+
+  <record id="view_search_occ_controle_acesso" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_acesso</field>
+        <field name="model">occ.controle.acesso</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="morador"/>
+                        <field name="placa"/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+                        <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                </search>
+        </field>
+  </record>
+
+  <record id="view_form_occ_controle_acesso" model="ir.ui.view">
+  	<field name="name">view_form_occ_controle_acesso</field>
+  	<field name="model">occ.controle.acesso</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field name="arch" type="xml">
+   		<form string="Cotrole de Acesso">
+   			<header>
+   				<button name="abrir_cancela_entrada" type="object" string="Liberar entrada" class="oe_highlight, oe_edit_only" />
+   				<button name="abrir_cancela_saida" type="object" string="Liberar Saída" class="oe_highlight, oe_edit_only" />
+   			</header>
+   			<sheet>
+                                <group name="group_top">
+   			            <field name="horario"/>
+   			            <field name="sentido"/>
+   			            <field name="morador"/>
+   			            <field name="placa"/>
+   			            <field name="status"/>
+                                </group>
+   			</sheet>
+  		</form>
+   	</field>
+  </record>
+</openerp>
