@@ -13,7 +13,7 @@
   	<field name="model">occ.tag</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
-   		<tree editable="True">
+   		<tree>
    			<field name="name"/>
    			<field name="tipo" widget="selection"/>
    			<field name="veiculo_ids"/>

@@ -19,7 +19,7 @@
   	<field name="model">occ.controle.acesso</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
-   		<tree create="false">
+   		<tree create="true">
    			<field name="horario" readonly="1"/>
    			<field name="sentido" readonly="1"/>
    			<field name="morador" readonly="1"/>

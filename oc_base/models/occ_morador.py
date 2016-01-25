@@ -63,8 +63,7 @@ class OccMorador(models.Model):
         if self.fone:
             val = re.sub('[^0-9]', '', self.fone)
             if len(val) == 10:
-                fone = "%s-%s.%s.%s" % (val[0:2], val[2:6], val[6:10])
-
+                fone = "%s-%s.%s" % (val[0:2], val[2:6], val[6:10])
             self.fone = fone
 
     @api.one
