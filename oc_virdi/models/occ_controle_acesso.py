@@ -17,6 +17,7 @@ class VirdiTerminais(models.Model):
                                         ('close', 'Fechada')],
                                        "Estado", default='close',
                                        required=True)
+    terminal_manual = fields.Integer('Acionamento manual canela')
 
     @api.multi
     def do_open_lock(self):

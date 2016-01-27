@@ -34,6 +34,7 @@
 			  <group name="group_top">
       			<group name="group_left">
         			<field name="name"/>
+        			<field name="active"/>
 	  				<field name="tipo" widget="radio"/>
 		   			<field name="status" widget="radio"/>
 	   				<field name="tag_id"/>
