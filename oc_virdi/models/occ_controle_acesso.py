@@ -5,7 +5,7 @@ from openerp import models, fields, api
 class VirdiTerminais(models.Model):
     _name = 'occ.virdi'
     _description = 'Equipamentos Virdi'
-    _order = 'terminal_id'
+    _order = 'terminal_status'
     _table = 'occ_virdi'
     terminal_id = fields.Char('ID do terminal', size=8, required=True)
     terminal_ip = fields.Char('IP do terminal', size=15, require=True)
@@ -30,28 +30,28 @@ class ControleAcesso(models.Model):
     _table = 'occ_controle_acesso'
     _order = 'horario desc'
     horario = fields.Char('Horário')
+    horario_2 = fields.Date()
     sentido = fields.Selection([('in', 'Entrada'), ('out', 'Saída')],
-                               "Sentido", default='in')
+                               "Sentido")
     morador = fields.Many2one('occ.morador', 'Morador')
     placa = fields.Many2one('occ.veiculo', 'Placa')
+    placa_2 = fields.Char('Placa_2')
     status = fields.Char('Situação')
 
-    def abrir_cancela_entrada(a, b, c, d, e):  # @NoSelf
-        import psycopg2.extensions
-        psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-        psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
-        with psycopg2.connect(database="reserva", user="e2i9") as conn_pg:
-            with conn_pg.cursor() as conn_pgs:
-                conn_pgs.execute("update occ_virdi SET terminal_status = 'open' \
-                                 where terminal_tipo = 'in';")
+    @api.multi
+    def abrir_cancela(self):
+        sql = """
+            UPDATE occ_virdi SET terminal_status = 'open'
+                WHERE terminal_tipo = %s;
+        """
+        self.env.cr.execute(sql, (self.sentido, ))
+        self.env.invalidate_all()
         return True
 
-    def abrir_cancela_saida(a, b, c, d, e):  # @NoSelf
-        import psycopg2.extensions
-        psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-        psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
-        with psycopg2.connect(database="reserva", user="e2i9") as conn_pg:
-            with conn_pg.cursor() as conn_pgs:
-                conn_pgs.execute("update occ_virdi SET terminal_status = 'open' \
-                                 where terminal_tipo = 'out';")
-        return True
+    @api.onchange('placa_2')
+    def preencher_dados(self):
+        if self.placa_2:
+            sql = """
+                SELECT id FROM occ_veiculos WHERE name = %s;
+                """
+            self.env.cr.execute(sql, (self.placa_2, ))
