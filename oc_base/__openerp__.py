@@ -45,5 +45,8 @@
              'views/occ_vaga_carro_view.xml',
              'views/occ_vaga_moto_view.xml',
              'views/occ_tag_view.xml',
+             'views/occ_visitante_view.xml',
+             'views/occ_empresa_view.xml',
+             'views/occ_funcionario_view.xml',
     ],
 }
