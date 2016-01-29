@@ -2,28 +2,40 @@
 <!DOCTYPE openerp>
 <openerp>
   <data>
-  	<!-- Criação do Menu Cadastro -->
-  	<menuitem id="oc_Register"
-  		name="Cadastro"
+  	<!-- Criação do Menu Controle de Acesso Veicular -->
+  	<menuitem
+  		id="oc_Canc"
+  		name="Controle de Acesso Veicular"
   		parent="oc_Opr"
   		sequence="0"
-  		groups="group_occ_manager,group_occ_user"/>
-  	<!-- Criação do Menu Cadastro de Vagas -->
-  	<menuitem id="oc_Register_Vagas"
-  		name="Vagas"
-  		parent="oc_Register"
-  		sequence="4"
-  		groups="group_occ_manager,group_occ_user"/>
-  	<!-- Criação do Menu Agenda
-  	<menuitem id="oc_Agenda"
-  		name="Agenda"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+
+  	<!-- Criação do Menu  Controle de Acesso Portão Moradores-->
+  	<menuitem
+  		id="oc_Port"
+  		name="Controle de Acesso Portão Moradores"
   		parent="oc_Opr"
-  		sequence="20"/> -->
-  	<!-- Criação do Menu Relatórios -->
-  	<menuitem id="oc_Reports"
-  		name="Relatórios"
+  		sequence="10"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+
+  	<!-- Criação do Menu Acesso Visitantes -->
+  	<menuitem
+  		id="oc_Vis"
+  		name="Controle de Acesso Visitantes"
+  		parent="oc_Opr"
+  		sequence="20"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+
+  	<!-- Criação do Menu Acesso Veicular -->
+  	<menuitem
+  		id="oc_PrestServ"
+  		name="Controle de Acesso Prestadores de Serviço"
   		parent="oc_Opr"
   		sequence="30"
-  		groups="group_occ_manager,group_occ_user"/>
+  		groups="group_occ_manager,group_occ_user"
+  	/>
   </data>
 </openerp>

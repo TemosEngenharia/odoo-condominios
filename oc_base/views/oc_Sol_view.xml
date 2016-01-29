@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<!-- Criação do Menu Reserva Salão de Festas -->
+  	<menuitem
+  		id="oc_SalFest"
+  		name="Salão de Festas"
+  		parent="oc_Sol"
+  		sequence="0"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	
+  	<!-- Criação do Menu Reserva Quiosque -->
+  	<menuitem
+  		id="oc_Quiosque"
+  		name="Quiosque"
+  		parent="oc_Sol"
+  		sequence="10"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	
+  	<!-- Criação do Menu Quadra de Futebol -->
+  	<menuitem
+  		id="oc_Fut"
+  		name="Quadra de Futebol"
+  		parent="oc_Sol"
+  		sequence="20"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  </data>
+</openerp>

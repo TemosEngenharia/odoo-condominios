@@ -8,7 +8,7 @@
   		view_mode="tree,form"/>
   	<menuitem id="menu_occ_acessos"
   		name="Registro dos Acessos"
-  		parent="oc_base.oc_Reports"
+  		parent="oc_base.oc_Opr"
   		sequence="1"
   		action="action_occ_acesso"
   		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	

@@ -2,11 +2,36 @@
 <!DOCTYPE openerp>
 <openerp>
   <data>
-  	<!-- Criação do Menu Administração -->
-  	<menuitem id="oc_Adm" name="Adminstração" groups="group_occ_manager,group_occ_user"/>  	
   	<!-- Criação do Menu Operação -->
-  	<menuitem id="oc_Opr" name="Operação" groups="group_occ_manager,group_occ_user"/>
+  	<menuitem
+  		id="oc_Opr"
+  		name="Operação"
+  		sequence = "0"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	
+  	<!-- Criação do Menu Cadastro -->
+  	<menuitem
+  		id="oc_Cad"
+  		name="Cadastro"
+  		sequence = "10"
+  		groups="group_occ_manager,group_occ_user"
+  	/>  	
+  	
+  	<!-- Criação do Menu Solicitações -->
+  	<menuitem
+  		id="oc_Sol"
+  		name="Solicitações"
+  		sequence = "20"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	
   	<!-- Criação do Menu Ajuda -->
-  	<menuitem id="oc_Hlp" name="Ajuda" groups="group_occ_manager,group_occ_user"/>  	
+  	<menuitem
+  		id="oc_Hlp"
+  		name="Ajuda"
+  		sequence = "30"
+  		groups="group_occ_manager,group_occ_user"
+  	/>  	
   </data>
 </openerp>

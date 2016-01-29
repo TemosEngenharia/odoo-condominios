@@ -12,7 +12,7 @@
   	<menuitem
   		id="menu_occ_virdi"
   		name="AC-1000"
-  		parent="oc_base.oc_Terminais"
+  		parent="oc_base.oc_Cad"
   		sequence="1"
   		action="action_occ_virdi"
   		groups="group_occ_manager_virdi,group_occ_user_virdi"
