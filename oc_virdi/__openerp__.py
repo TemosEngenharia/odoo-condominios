@@ -29,7 +29,7 @@
              'security/oc_virdi_security.xml',
              'security/ir.model.access.csv',
              'views/occ_virdi.xml',
-             'views/occ_controle_acesso.xml'
-             # 'views/occ_acesso.xml'
+             'views/occ_controle_acesso.xml',
+             'views/occ_acesso.xml',
             ],
 }

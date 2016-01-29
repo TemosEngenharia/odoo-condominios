@@ -3,22 +3,28 @@
 <openerp>
   <data>
   	<!-- Criação do Menu Bem vindo -->
-  	<menuitem id="oc_Welcome"
+  	<menuitem
+  		id="oc_Welcome"
   		name="Bem vindo"
   		parent="oc_Hlp"
   		sequence="0"
-  		groups="group_occ_manager,group_occ_user"/>
+  		groups="group_occ_manager,group_occ_user"
+  	/>
   	<!-- Criação do Menu manual do usuário -->
-  	<menuitem id="oc_UserManual"
+  	<menuitem
+  		id="oc_UserManual"
   		name="Manual do Usuário"
   		parent="oc_Hlp"
   		sequence="10"
-  		groups="group_occ_manager,group_occ_user"/>
+  		groups="group_occ_manager,group_occ_user"
+  	/>
   	<!-- Criação do Menu Sobre -->
-  	<menuitem id="oc_About"
+  	<menuitem
+  		id="oc_About"
   		name="Sobre"
   		parent="oc_Hlp"
   		sequence="20"
-  		groups="group_occ_manager,group_occ_user"/>
+  		groups="group_occ_manager,group_occ_user"
+  	/>
   </data>
 </openerp>

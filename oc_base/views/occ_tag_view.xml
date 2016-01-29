@@ -3,17 +3,29 @@
 <openerp>
   <data>
   	<!-- Action to open OCCadastro.TAG -->
-  	<act_window id="action_occ_tag" name="Registro de TAG" res_model="occ.tag" view_mode="tree,form"/>
+  	<act_window
+  		id="action_occ_tag"
+  		name="Cadastro de TAG"
+  		res_model="occ.tag"
+  		view_mode="tree,form"
+  	/>
 
   	<!-- Menu item to open OCCadastro TAG -->
-  	<menuitem id="menu_occ_tag" name="TAG" parent="oc_Register" sequence="6" action="action_occ_tag" groups="group_occ_manager,group_occ_user"/>
+  	<menuitem
+  		id="menu_occ_tag"
+  		name="TAG"
+  		parent="oc_TAGPARK"
+  		sequence="0"
+  		action="action_occ_tag"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
   </data>
   <record id="view_tree_occ_tag" model="ir.ui.view">
-  	<field name="name">TAG tree</field>
+  	<field name="name">view_tree_occ_tag</field>
   	<field name="model">occ.tag</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
-   		<tree editable="True">
+   		<tree>
    			<field name="name"/>
    			<field name="tipo" widget="selection"/>
    			<field name="veiculo_ids"/>
@@ -23,7 +35,7 @@
    	</field>
   </record>
   <record id="view_form_occ_tag" model="ir.ui.view">
-  	<field name="name">TAG Form</field>
+  	<field name="name">view_form_occ_tag</field>
   	<field name="model">occ.tag</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
@@ -32,18 +44,24 @@
    				<!-- Aqui vão os botões -->
    			</header>
    			<sheet>
-			  <group name="group_top">
-      			<group name="group_left">
-        			<field name="name"/>
-	  				<field name="active"/>
-	  				<field name="tipo" widget="radio"/>
-      			</group>
-      			<group name="group_right">
-	  				<field name="vaga_carro_ids" widget="many2many_tags" attrs="{'invisible': [('tipo','=', 'moto')]}"/>
-	  				<field name="vaga_moto_ids" widget="many2many_tags" attrs="{'invisible': [('tipo','=', 'carro')]}"/>
-      			</group>
-      			<field name="veiculo_ids" nolabel="True"/>
-    		  </group>
+				<group name="group_top">
+      				<group name="group_left">
+        				<field name="name"/>
+		  				<field name="active"/>
+		  				<field name="tipo" widget="radio"/>
+      				</group>
+      				<group name="group_right">
+	  					<field name="vaga_carro_ids" widget="many2many_tags" attrs="{'invisible': [('tipo','=', 'moto')]}"/>
+	  					<field name="vaga_moto_ids" widget="many2many_tags" attrs="{'invisible': [('tipo','=', 'carro')]}"/>
+	      			</group>
+	      		</group>
+				<group>
+					<notebook>
+	  					<page string="Veículos">
+	  						<field name="veiculo_ids" nolabel="1"/>
+	  					</page>
+	  				</notebook>
+	  			</group>
    			</sheet>
   		</form>
    	</field>

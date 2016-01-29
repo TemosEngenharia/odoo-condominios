@@ -3,37 +3,39 @@
 <openerp>
   <data>
   	<!-- Action to open OCCadastro.Moradores -->
-  	<act_window id="action_occ_morador"
-  		name="Registro de Morador"
+  	<act_window
+  		id="action_occ_morador"
+  		name="Cadastro Morador"
   		res_model="occ.morador"
-  		view_mode="tree,form"/>
+  		view_mode="tree,form"
+  	/>
 
   	<!-- Menu item to open OCCadastro.Morador -->
-  	<menuitem id="menu_occ_morador"
+  	<menuitem
+  		id="menu_occ_morador"
   		name="Morador"
-  		parent="oc_Register"
-  		sequence="3"
+  		parent="oc_ResAuto"
+  		sequence="0"
   		action="action_occ_morador"
-  		groups="group_occ_manager,group_occ_user"/>  	
+  		groups="group_occ_manager,group_occ_user"
+  	/>  	
   </data>
   <record id="view_tree_occ_morador" model="ir.ui.view">
-  	<field name="name">Morador tree</field>
+  	<field name="name">view_tree_occ_morador</field>
   	<field name="model">occ.morador</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
    		<tree>
-   			<field name="name"/>
-   			<field name="cpf"/>
-   			<field name="rg"/>
-   			<field name="fone"/>
-   			<field name="celular"/>
    			<field name="bloco_id"/>
    			<field name="apto_id"/>
+   			<field name="name"/>
+   			<field name="fone"/>
+   			<field name="celular"/>
    		</tree>
    	</field>
   </record>
   <record id="view_form_occ_morador" model="ir.ui.view">
-  	<field name="name">Morador Form</field>
+  	<field name="name">view_form_occ_morador</field>
   	<field name="model">occ.morador</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
@@ -42,11 +44,11 @@
    				<!-- Aqui vão os botões -->
    			</header>
    			<sheet>
-			  <group name="group_top">
-      			<group name="group_left">
+			  <group>
+      			<group>
 			   		<field name="image" widget="image" nolabel="1"/>
 			   	</group>
-			   	<group name="group_right">
+			   	<group>
         			<field name="name" label="Nome completo"/>
         			<field name="cpf"/>
         			<field name="rg"/>
@@ -56,7 +58,7 @@
 	  				<field name="apto_id" widget="selection"/>
       			</group>
     		  </group>
-    		  <group name="group_botton">
+    		  <group>
     		  	<notebook>
 	  				<page string="Veículos">
 	  					<field name="veiculo_ids" nolabel="1"/>
