@@ -3,24 +3,95 @@
 <openerp>
   <data>
   	<act_window id="action_occ_controle_acesso"
-  		name="Registro Controle de Acesso"
+  		name="Movimentação de veículos dos moradores"
   		res_model="occ.controle.acesso"
-  		view_mode="tree,form"/>
+  		view_mode="tree,form"
+  		context = "{'search_default_filter_hoje':1}"
+  		target = "current"/>
+  	<act_window id="action_occ_monitoramento_abertura_manual_cancela"
+  		name="Movimentação de veículos dos moradores sem leitura do TAG"
+  		res_model="occ.controle.manual.cancela"
+  		view_mode="tree"
+  		context = "{'search_default_filter_hoje':1}"
+  		target = "current"/>
+  	<act_window id="action_occ_controle_manual_cancela"
+  		name="Abertura manual da cancela"
+  		res_model="occ.controle.manual.cancela"
+  		view_mode="form,tree"
+  		target = "new"/>
+  	<act_window id="action_occ_status_abertura_manual"
+  		name="Justificativas para abertura manual da cancela"
+  		res_model="occ.status.abertura.manual"
+  		view_mode="tree,form"
+  		target = "current"/>
+  	  	
   	<menuitem id="menu_occ_controle_acesso"
-  		name="Controle de Acesso"
-  		parent="oc_base.oc_Opr"
-  		sequence="2"
+  		name="Monitorar Cancelas"
+  		parent="oc_base.oc_Canc"
+  		sequence="0"
   		action="action_occ_controle_acesso"
   		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  	<menuitem id="menu_occ_monitoramento_abertura_manual_cancela"
+  		name="Monitorar abertura manual"
+  		parent="oc_base.oc_Canc"
+  		sequence="1"
+  		action="action_occ_monitoramento_abertura_manual_cancela"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  	<menuitem id="menu_occ_controle_manual_cancela"
+  		name="Abrir Cancelas"
+  		parent="oc_base.oc_Canc"
+  		sequence="2"
+  		action="action_occ_controle_manual_cancela"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  	<menuitem id="menu_occ_status_abertura_manual"
+  		name="Motivos abertura manual"
+  		parent="oc_base.oc_Param"
+  		sequence="0"
+  		action="action_occ_status_abertura_manual"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+
   </data>
   
+  <record id="view_search_occ_controle_acesso" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_acesso</field>
+        <field name="model">occ.controle.acesso</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="morador"/>
+                        <field name="placa"/>
+                      	<filter name="filter_hoje" string="Hoje" domain="[('horario', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('horario', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]"/>
+                      	<separator/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+    	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                </search>
+        </field>
+  </record>
+  
+  <record id="view_search_occ_controle_manual_cancela" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_manual_cancela</field>
+        <field name="model">occ.controle.manual.cancela</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="bloco_id"/>
+                        <field name="apto_id"/>
+                        <field name="morador_id"/>
+                        <field name="placa_id"/>
+                      	<filter name="filter_hoje" string="Hoje" domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%Y.%m.%d - 00:00:00')),('create_date', '&lt;=', datetime.datetime.now().strftime('%Y.%m.%d 23:59:59'))]"/>
+                      	<separator/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+    	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                      	<separator/>
+                      	<filter string="Manual" name="status" domain="[('status','like','%manual%')]"/>
+                </search>
+        </field>
+  </record>
+
   <record id="view_tree_occ_controle_acesso" model="ir.ui.view">
   	<field name="name">view_tree_occ_controle_acesso</field>
   	<field name="model">occ.controle.acesso</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
-   		<tree create="true" edit="true" delete="false" default_order="horario desc">
-            <button string="Liberar" name="abrir_cancela" type="object"/>
+   		<tree create="false" edit="false" delete="false" default_order="horario desc">
             <field name="horario" readonly="1"/>
             <field name="sentido" readonly="1"/>
             <field name="morador" readonly="1"/>
@@ -30,17 +101,31 @@
    	</field>
   </record>
 
-  <record id="view_search_occ_controle_acesso" model="ir.ui.view">
-        <field name="name">view_search_occ_controle_acesso</field>
-        <field name="model">occ.controle.acesso</field>
-        <field name="arch" type="xml">
-                <search>
-                        <field name="morador"/>
-                        <field name="placa"/>
-                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
-                        <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
-                </search>
-        </field>
+  <record id="view_tree_occ_controle_manual_cancela" model="ir.ui.view">
+  	<field name="name">view_tree_occ_controle_manual_cancela</field>
+  	<field name="model">occ.controle.manual.cancela</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field  name="arch" type="xml">
+   		<tree create="false" edit="false" delete="false" default_order="horario desc">
+            <field name="create_date" readonly="1" string="Horário da liberação"/>
+            <field name="sentido" readonly="1"/>
+            <field name="bloco_id" readonly="1"/>
+            <field name="apto_id" readonly="1"/>
+            <field name="placa_manual" readonly="1"/>
+            <field name="status" readonly="1"/>
+    	</tree>
+   	</field>
+  </record>
+
+  <record id="view_tree_occ_status_abertura_manual" model="ir.ui.view">
+  	<field name="name">view_tree_occ_status_abertura_manual</field>
+  	<field name="model">occ.status.abertura.manual</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field  name="arch" type="xml">
+   		<tree create="true" edit="true" delete="false" default_order="name">
+            <field name="name"/>
+    	</tree>
+   	</field>
   </record>
 
   <record id="view_form_occ_controle_acesso" model="ir.ui.view">
@@ -48,10 +133,9 @@
   	<field name="model">occ.controle.acesso</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field name="arch" type="xml">
-       <form string="Cotrole de Acesso">
+       <form string="Controle de Acesso">
             <header>
-                <button name="abrir_cancela_entrada" type="object" string="Liberar entrada" class="oe_highlight, oe_edit_only" />
-                <button name="abrir_cancela_saida" type="object" string="Liberar Saída" class="oe_highlight, oe_edit_only" />
+                <button name="abrir_cancela" type="object" string="Abrir cancela" class="oe_highlight, oe_edit_only" />
             </header>
             <sheet>
                  <group>
@@ -59,10 +143,41 @@
                     <field name="sentido"/>
                     <field name="morador"/>
                     <field name="placa"/>
-                    <field name="placa_2"/>
                     <field name="status"/>
                  </group>
             </sheet>
+       </form>
+    </field>
+  </record>
+
+  <record id="view_form_occ_controle_manual_cancela" model="ir.ui.view">
+  	<field name="name">view_form_occ_controle_manual_cancela</field>
+  	<field name="model">occ.controle.manual.cancela</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field name="arch" type="xml">
+       <form string="Abertura manual da cancela">
+            <header>
+            </header>
+            <sheet>
+            	<group>
+                 <group>
+                    <!-- <field name="horario" readonly="0"/> -->
+                    <field name="sentido" widget="radio"/>
+                 </group>
+                 <group>
+                    <field name="bloco_id"/>
+                    <field name="apto_id"/>
+                    <field name="placa_manual"/>
+                 </group>
+                </group>
+                <group>
+                    <field name="status"/>
+                </group>
+            </sheet>
+            <footer>
+            	<button name="write" type="object" string="Abrir"/>
+            	<button name="cancel" string="Cancelar" special="cancel" class="oe_link"/>
+            </footer>
        </form>
     </field>
   </record>

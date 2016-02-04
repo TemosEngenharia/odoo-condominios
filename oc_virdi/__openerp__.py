@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Controle de Acesso",
+    'name': "Gestão dos módulos Virdi pela rede",
 
     'summary': """
-        Aplicativo de controle de acesso de portaria no Odoo""",
+        Acesso aos módulos de controle de acesso da Virdi""",
 
     'description': """
         Módulos para controle das unidades AC-1000, AC-2500 da Virdi
@@ -19,17 +19,16 @@
     'category': 'Specific Industry Applications',
     'version': '9.0.1.0.0',
 
-    'application': False,
+    'application': True,
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'oc_base', ],
 
     # always loaded
     'data': [
-             'security/oc_virdi_security.xml',
-             'security/ir.model.access.csv',
-             'views/occ_virdi.xml',
-             'views/occ_controle_acesso.xml',
-             'views/occ_acesso.xml',
-            ],
+            'security/oc_virdi_security.xml',
+            'security/ir.model.access.csv',
+            'views/occ_controle_acesso.xml',
+            'views/occ_virdi.xml',
+    ],
 }

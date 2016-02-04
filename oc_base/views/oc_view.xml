@@ -14,7 +14,7 @@
   	<menuitem
   		id="oc_Cad"
   		name="Cadastro"
-  		sequence = "10"
+  		sequence = "1"
   		groups="group_occ_manager,group_occ_user"
   	/>  	
   	
@@ -22,7 +22,7 @@
   	<menuitem
   		id="oc_Sol"
   		name="Solicitações"
-  		sequence = "20"
+  		sequence = "2"
   		groups="group_occ_manager,group_occ_user"
   	/>
   	
@@ -30,7 +30,7 @@
   	<menuitem
   		id="oc_Hlp"
   		name="Ajuda"
-  		sequence = "30"
+  		sequence = "3"
   		groups="group_occ_manager,group_occ_user"
   	/>  	
   </data>
