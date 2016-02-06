@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE odoo>
+<odoo>
+	<record id="motivo_01" model="occ.status.abertura.manual">
+		<field name="active">True</field>
+		<field name="name">Morador com carro novo, realizar o cadastro e instalação do TAG</field>
+	</record>
+	<record id="motivo_02" model="occ.status.abertura.manual">
+		<field name="active">True</field>
+		<field name="name">Morador sendo transportado por terceiro</field>
+	</record>
+	<record id="motivo_03" model="occ.status.abertura.manual">
+		<field name="active">True</field>
+		<field name="name">Moradro utilizando carro reserva</field>
+	</record>
+	<record id="motivo_04" model="occ.status.abertura.manual">
+		<field name="active">True</field>
+		<field name="name">Sistema não fez leitura do TAG na saída</field>
+	</record>
+	<record id="motivo_05" model="occ.status.abertura.manual">
+		<field name="active">True</field>
+		<field name="name">Veículo de força pública, polícia, bombeiros ou inspeção</field>
+	</record>
+	<record id="motivo_06" model="occ.status.abertura.manual">
+		<field name="active">True</field>
+		<field name="name">Veículo do correio, SEDEX e encomendas</field>
+	</record>
+</odoo>

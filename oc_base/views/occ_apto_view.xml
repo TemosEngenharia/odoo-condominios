@@ -3,59 +3,65 @@
 <openerp>
   <data>
   	<!-- Action to open OCCadastro.Apto -->
-  	<act_window id="action_occ_apto"
-  		name="Registro de Apartamentos"
+  	<act_window
+  		id="action_occ_apto"
+  		name="Cadastro Apartamentos"
   		res_model="occ.apto"
-  		view_mode="tree,form"/>
+  		view_mode="tree,form"
+  	/>
 
   	<!-- Menu item to open OCCadastro Apto -->
-  	<menuitem id="menu_occ_apto"
+  	<menuitem
+  		id="menu_occ_apto"
   		name="Apartamento"
-  		parent="oc_Register"
-  		sequence="2"
+  		parent="oc_BlApto"
+  		sequence="10"
   		action="action_occ_apto"
-  		groups="group_occ_manager,group_occ_user"/>  	
+  		groups="group_occ_manager,group_occ_user"
+  	/>  	
   </data>
-<!-- 
   <record id="view_tree_occ_apto" model="ir.ui.view">
-  	<field name="name">Apartamento tree</field>
+  	<field name="name">view_tree_occ_apto</field>
   	<field name="model">occ.apto</field>
-  	<field  name="arch" type="xml">
-   		<tree editable="True">
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
+  	<field name="arch" type="xml">
+   		<tree>
    			<field name="name"/>
-   			<field name="numero"/>
    			<field name="bloco_id" widget="selection"/>
    			<field name="vaga_carro_id" widget="selection"/>
    			<field name="vaga_moto_id" widget="selection"/>
     	</tree>
    	</field>
   </record>
--->  
   <record id="view_form_occ_apto" model="ir.ui.view">
-  	<field name="name">Apartamento Form</field>
+  	<field name="name">view_form_occ_apto</field>
   	<field name="model">occ.apto</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
-  	<field  name="arch" type="xml">
+  	<field name="arch" type="xml">
    		<form string="Nome do Apartamento">
    			<header>
    				<!-- Aqui vão os botões -->
    			</header>
    			<sheet>
-			  <group name="group_top">
-      			<group name="group_left">
-        			<field name="name"/>
-        			<field name="numero"/>
-	  				<field name="bloco_id"/>
+   				<group>
+    	  			<group name="group">
+	        			<field name="name"/>
+	  					<field name="bloco_id"/>
+      				</group>
+				</group>
+				<group>
+			  		<notebook>
+			  			<page string="Moradores">
+	  						<field name="morador_ids" nolabel="1"/>
+	  					</page>
+	  					<page string="Vagas para Carro">
+			  				<field name="vaga_carro_id" string="Vagas para carro"/>
+		  				</page>
+	  					<page string="Vagas para Moto">
+	  						<field name="vaga_moto_id" string="Vagas para motos"/>
+		  				</page>
+	  				</notebook>
       			</group>
-      			<group name="group_right">
-	  				<!-- Grupo Vazio -->
-      			</group>
-      			<group name="group_bottom">
-	  				<field name="vaga_carro_id"/>
-	  				<field name="vaga_moto_id"/>
-      				<field name="morador_ids"/>
-      			</group>
-    		  </group>
    			</sheet>
   		</form>
    	</field>

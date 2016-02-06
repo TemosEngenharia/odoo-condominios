@@ -3,25 +3,56 @@
 <openerp>
   <data>
   	<!-- Action to open OCCadastro.Vaga -->
-  	<act_window id="action_occ_vaga_moto" name="Registro de Vagas Motos" res_model="occ.vaga.moto" view_mode="tree,form"/>
+  	<act_window
+  		id="action_occ_vaga_moto"
+  		name="Cadastro Vagas para Motos"
+  		res_model="occ.vaga.moto"
+  		view_mode="tree,form"
+  	/>
 
   	<!-- Menu item to open OCCadastro Vaga -->
-  	<menuitem id="menu_occ_vaga_moto" name="Vagas Motos" parent="oc_Register_Vagas" sequence="2" action="action_occ_vaga_moto" groups="group_occ_manager,group_occ_user"/>
+  	<menuitem
+  		id="menu_occ_vaga_moto"
+  		name="Vagas Motos"
+  		parent="oc_TAGPARK"
+  		sequence="20"
+  		action="action_occ_vaga_moto"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
   </data>
   <record id="view_tree_occ_vaga_moto" model="ir.ui.view">
-  	<field name="name">Vaga Moto tree</field>
+  	<field name="name">view_tree_occ_vaga_moto</field>
   	<field name="model">occ.vaga.moto</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
-   		<tree editable="True">
+   		<tree>
    			<field name="name"/>
+   			<field name="tag_ids" widget="many2many_tags"/>
         	<field name="bloco_id" widget="selection"/>
         	<field name="apto_id" widget="selection"/>
    		</tree>
    	</field>
   </record>
+  
+    <record id="view_search_occ_vaga_moto" model="ir.ui.view">
+        <field name="name">view_search_occ_vaga_moto</field>
+        <field name="model">occ.vaga.moto</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="bloco_id"/>
+                        <field name="apto_id"/>
+                        <field name="tag_ids"/>
+                      	<filter name="filter_vagas_disponiveis" string="Vagas disponíveis" domain="[[u'tag_ids', u'=', False]]"/>
+                      	<filter name="filter_vagas_utilizadas" string="Vagas utilizadas" domain="[[u'tag_ids', u'!=', False]]"/>
+                      	<separator/>
+                        <filter name="filter_vagas_alugadas" string="Vagas Alugadas" domain="[[u'status', u'=', True]]"/>
+    	                <filter name="filter_vagas_proprias" string="Vagas Próprias" domain="[[u'status', u'=', False]]"/>
+                </search>
+        </field>
+  </record>
+    
   <record id="view_form_occ_vaga_moto" model="ir.ui.view">
-  	<field name="name">Vaga Moto Form</field>
+  	<field name="name">view_form_occ_vaga_moto</field>
   	<field name="model">occ.vaga.moto</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
   	<field  name="arch" type="xml">
@@ -32,12 +63,13 @@
    			<sheet>
 			  <group name="group_top">
       			<group name="group_left">
-        			<field name="name"/>
-        			<field name="tag_ids" widget="many2many_tags"/>
-      			</group>
-      			<group name="group_right">
         			<field name="bloco_id" widget="selection"/>
         			<field name="apto_id" widget="selection"/>
+      			</group>
+      			<group name="group_right">
+        			<field name="name"/>
+        			<field name="tag_ids" widget="many2many_tags"/>
+        			<field name="status" string="Vaga alugada"/>
       			</group>
     		  </group>
    			</sheet>

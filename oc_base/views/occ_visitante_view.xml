@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<!-- Action to open OCCadastro.visitantees -->
+  	<act_window
+  		id="action_occ_visitante"
+  		name="Cadastro visitante"
+  		res_model="occ.visitante"
+  		view_mode="tree,form"
+  	/>
+
+  	<!-- Menu item to open OCCadastro.Visitante -->
+  	<menuitem
+  		id="menu_occ_visitante"
+  		name="Visitante"
+  		parent="oc_VisPServ"
+  		sequence="0"
+  		action="action_occ_visitante"
+  		groups="group_occ_manager,group_occ_user"
+  	/>  	
+  </data>
+  <record id="view_tree_occ_visitante" model="ir.ui.view">
+  	<field name="name">view_tree_occ_visitante</field>
+  	<field name="model">occ.visitante</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
+  	<field  name="arch" type="xml">
+   		<tree>
+   			<field name="name"/>
+   			<field name="cpf"/>
+   			<field name="rg"/>
+   			<field name="fone"/>
+   			<field name="celular"/>
+   		</tree>
+   	</field>
+  </record>
+  <record id="view_form_occ_visitante" model="ir.ui.view">
+  	<field name="name">view_form_occ_visitante</field>
+  	<field name="model">occ.visitante</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager')),(4, ref('group_occ_user'))]"/>
+  	<field  name="arch" type="xml">
+   		<form string="Visitante">
+   			<header>
+   				<!-- Aqui vão os botões -->
+   			</header>
+   			<sheet>
+   				<group>
+      				<group>
+			   			<field name="image" widget="image" nolabel="1"/>
+			   		</group>
+			   		<group>
+        				<field name="name" label="Nome completo"/>
+	        			<field name="cpf"/>
+    	    			<field name="rg"/>
+        				<field name="fone" label="Telefone Fixo"/>
+        				<field name="celular" label="Telefone Celular"/>
+      				</group>
+      			</group>
+   			</sheet>
+  		</form>
+   	</field>
+  </record>
+</openerp>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<!-- Criação do Menu Cadastro de TAGs e Vagas -->
+  	<menuitem
+  	    id="oc_TAGPARK"
+  		name="TAGs e Vagas"
+  		parent="oc_Cad"
+  		sequence="0"
+  		groups="group_occ_manager"
+  	/>
+  	
+  	<!-- Criação do Menu Cadastro de Bloco e Apartamento -->
+  	<menuitem
+  	    id="oc_BlApto"
+  		name="Blocos e Apartamentos"
+  		parent="oc_Cad"
+  		sequence="10"
+  		groups="group_occ_manager"
+  	/>
+  	
+  	<!-- Criação do Menu Cadastro de Moradores e Veículos  -->
+  	<menuitem
+  	    id="oc_ResAuto"
+  		name="Moradores e Veículos"
+  		parent="oc_Cad"
+  		sequence="20"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	
+  	<!-- Criação do Menu Cadastro Visitantes e Prestadores de Serviços -->
+  	<menuitem
+  		id="oc_VisPServ"
+  		name="Visitantes e Prestadores de Serviço"
+  		parent="oc_Cad"
+  		sequence="30"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	<!-- Criação do Menu Cadastro Terminais -->
+  	<menuitem
+  		id="oc_Terminais"
+  		name="Terminais de controle"
+  		parent="oc_Cad"
+  		sequence="30"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	<!-- Criação do Menu Parametização -->
+  	<menuitem
+  		id="oc_Param"
+  		name="Parametrização"
+  		parent="oc_Cad"
+  		sequence="40"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  </data>
+</openerp>
