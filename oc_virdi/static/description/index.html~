@@ -4,7 +4,7 @@
 <title>E2i9 Odoo - Condomínios</title>
 <meta name="generator" content="Bluefish 2.2.5" >
 <meta name="author" content="Cezar J Sant Anna Jr" >
-<meta name="date" content="2016-02-03T09:41:22-0200" >
+<meta name="date" content="2015-12-04T17:50:00-0200" >
 <meta name="copyright" content="">
 <meta name="keywords" content="">
 <meta name="description" content="Arquivo de descrição do módulo Odoo-condominios da E2i9">
@@ -15,7 +15,7 @@
 <meta http-equiv="expires" content="0">
 </head>
 <body>
-<p><strong><h1>E2i9 - Acesso aos terminais Virdi</h1></strong></p><br>
-<p><h3>Módulo para acessar as informações do servidor Virdi pelo Odoo</h3></p>
+<p><strong><h1>E2i9 - Odoo Condomínios Virdi</h1></strong></p><br>
+<p><h3>Módulo para controle de acesso em portaria de condomínio residencial</h3></p>
 </body>
 </html>

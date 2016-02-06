@@ -12,9 +12,9 @@ class OccMorador(models.Model):
     _rec_name = 'name'
     _table = 'occ_morador'
     _sql_constraints = [
-                        ('occ.morador', 'unique (cpf)',
-                         'Já existe um morador cadastrado com este CPF!')
-                       ]
+        ('occ.morador', 'unique (cpf)',
+         'Já existe um morador cadastrado com este CPF!')
+    ]
 
     active = fields.Boolean('Ativo', default=True)
     name = fields.Char('Morador', size=45, required=True)

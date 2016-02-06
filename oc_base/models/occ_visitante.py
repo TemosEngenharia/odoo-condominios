@@ -11,9 +11,9 @@ class OccVisitante(models.Model):
     _order = 'name'
     _table = 'occ_visitante'
     _sql_constraints = [
-                        ('occ.visitante', 'unique (cpf)',
-                         'Já existe um visitante cadastrado com este CPF!')
-                       ]
+        ('occ.visitante', 'unique (cpf)',
+         'Já existe um visitante cadastrado com este CPF!')
+    ]
 
     active = fields.Boolean('Ativo', default=True)
     name = fields.Char('Visitante', size=45, required=True)

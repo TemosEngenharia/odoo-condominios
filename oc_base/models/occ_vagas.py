@@ -17,7 +17,7 @@ class OccVagaCarro(models.Model):
     tag_ids = fields.Many2many('occ.tag', 'occ_tag_carro_rel',
                                'vaga_carro_ids', 'tag_ids',
                                string='TAGs')
-    status = fields.Boolean('Status', default=True)
+    status = fields.Boolean('Status', default=False)
 
 
 class OccVagaMoto(models.Model):
@@ -35,4 +35,4 @@ class OccVagaMoto(models.Model):
     tag_ids = fields.Many2many('occ.tag', 'occ_tag_moto_rel',
                                'vaga_moto_ids', 'tag_ids',
                                string='TAGs')
-    status = fields.Boolean('Status', default=True)
+    status = fields.Boolean('Status', default=False)

@@ -37,5 +37,21 @@
   		sequence="30"
   		groups="group_occ_manager,group_occ_user"
   	/>
+  	<!-- Criação do Menu Cadastro Terminais -->
+  	<menuitem
+  		id="oc_Terminais"
+  		name="Terminais de controle"
+  		parent="oc_Cad"
+  		sequence="30"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
+  	<!-- Criação do Menu Parametização -->
+  	<menuitem
+  		id="oc_Param"
+  		name="Parametrização"
+  		parent="oc_Cad"
+  		sequence="40"
+  		groups="group_occ_manager,group_occ_user"
+  	/>
   </data>
 </openerp>
