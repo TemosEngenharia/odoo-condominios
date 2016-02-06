@@ -79,11 +79,11 @@ class ControleManualCancela(models.Model):
     _description = u'Tabela com os dados para abertura manual da cancela'
     _table = 'occ_controle_manual_cancela'
     _order = 'horario desc'
-    horario = fields.Datetime(u'Horario')
     sentido = fields.Selection([('in', u'Entrada'), ('out', u'Saída')],
                                u"Sentido", required=True)
     bloco_id = fields.Many2one('occ.bloco', u'Bloco', required=True)
-    apto_id = fields.Many2one('occ.apto', u'Apartamento', required=True)
+    apto_id = fields.Many2one('occ.apto', u'Apartamento', required=True,
+                              domain="[('bloco_id','=',bloco_id)]")
     placa_manual = fields.Char(u'Placa', size=7, required=True)
     placa_id = fields.Many2one('occ.veiculo', u'Placa')
     morador_id = fields.Many2one('occ.morador', u'Morador')
@@ -99,3 +99,40 @@ class ControleManualCancela(models.Model):
         self.env.cr.execute(sql, (self.sentido, ))
         self.env.invalidate_all()
         return models.Model.write(self, vals)
+
+
+class ControleManualVisitante(models.Model):
+    _name = 'occ.controle.manual.visitante'
+    _rec_name = 'visitante_id'
+    _description = u'Tabela com os dados para abertura portão visitante'
+    _table = 'occ_controle_manual_visitante'
+    _order = 'create_date desc'
+    sentido = fields.Selection([('in', u'Entrada'), ('out', u'Saída')],
+                               u"Sentido", required=True, default='in')
+    bloco_id = fields.Many2one('occ.bloco', u'Bloco', required=True)
+    apto_id = fields.Many2one('occ.apto', u'Apartamento', required=True,
+                              domain="[('bloco_id','=',bloco_id)]")
+    visitante_id = fields.Many2one('occ.visitante', u'Visitante',
+                                   required=True)
+    morador_id = fields.Many2one('occ.morador', u'Entrada autorizada por',
+                                 domain="[('apto_id','='.apto_id)",
+                                 required=True)
+
+
+class ControleManualPrestServ(models.Model):
+    _name = 'occ.controle.manual.funcionario'
+    _rec_name = 'funcionario_id'
+    _description = u'Tabela com os dados para abertura portão empresas'
+    _table = 'occ_controle_manual_funcionario'
+    _order = 'create_date desc'
+    sentido = fields.Selection([('in', u'Entrada'), ('out', u'Saída')],
+                               u"Sentido", required=True, default='in')
+    bloco_id = fields.Many2one('occ.bloco', u'Bloco', required=True)
+    apto_id = fields.Many2one('occ.apto', u'Apartamento', required=True,
+                              domain="[('bloco_id','=',bloco_id)]")
+    funcionario_id = fields.Many2one('occ.funcionario',
+                                     u'Prestador de Serviço',
+                                     required=True)
+    morador_id = fields.Many2one('occ.morador', u'Entrada autorizada por',
+                                 domain="[('apto_id','='.apto_id)",
+                                 required=True)

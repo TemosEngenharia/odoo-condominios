@@ -33,6 +33,24 @@
    		</tree>
    	</field>
   </record>
+  
+    <record id="view_search_occ_vaga_moto" model="ir.ui.view">
+        <field name="name">view_search_occ_vaga_moto</field>
+        <field name="model">occ.vaga.moto</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="bloco_id"/>
+                        <field name="apto_id"/>
+                        <field name="tag_ids"/>
+                      	<filter name="filter_vagas_disponiveis" string="Vagas disponíveis" domain="[[u'tag_ids', u'=', False]]"/>
+                      	<filter name="filter_vagas_utilizadas" string="Vagas utilizadas" domain="[[u'tag_ids', u'!=', False]]"/>
+                      	<separator/>
+                        <filter name="filter_vagas_alugadas" string="Vagas Alugadas" domain="[[u'status', u'=', True]]"/>
+    	                <filter name="filter_vagas_proprias" string="Vagas Próprias" domain="[[u'status', u'=', False]]"/>
+                </search>
+        </field>
+  </record>
+    
   <record id="view_form_occ_vaga_moto" model="ir.ui.view">
   	<field name="name">view_form_occ_vaga_moto</field>
   	<field name="model">occ.vaga.moto</field>
@@ -45,12 +63,13 @@
    			<sheet>
 			  <group name="group_top">
       			<group name="group_left">
-        			<field name="name"/>
-        			<field name="tag_ids" widget="many2many_tags"/>
-      			</group>
-      			<group name="group_right">
         			<field name="bloco_id" widget="selection"/>
         			<field name="apto_id" widget="selection"/>
+      			</group>
+      			<group name="group_right">
+        			<field name="name"/>
+        			<field name="tag_ids" widget="many2many_tags"/>
+        			<field name="status" string="Vaga alugada"/>
       			</group>
     		  </group>
    			</sheet>

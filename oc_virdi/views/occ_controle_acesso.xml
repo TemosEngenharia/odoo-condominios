@@ -80,8 +80,6 @@
                       	<separator/>
                         <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
     	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
-                      	<separator/>
-                      	<filter string="Manual" name="status" domain="[('status','like','%manual%')]"/>
                 </search>
         </field>
   </record>
@@ -106,7 +104,7 @@
   	<field name="model">occ.controle.manual.cancela</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
-   		<tree create="false" edit="false" delete="false" default_order="horario desc">
+   		<tree create="false" edit="false" delete="false" default_order="create_date desc">
             <field name="create_date" readonly="1" string="Horário da liberação"/>
             <field name="sentido" readonly="1"/>
             <field name="bloco_id" readonly="1"/>
@@ -122,7 +120,7 @@
   	<field name="model">occ.status.abertura.manual</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
-   		<tree create="true" edit="true" delete="false" default_order="name">
+   		<tree default_order="name">
             <field name="name"/>
     	</tree>
    	</field>
@@ -161,17 +159,16 @@
             <sheet>
             	<group>
                  <group>
-                    <!-- <field name="horario" readonly="0"/> -->
                     <field name="sentido" widget="radio"/>
                  </group>
                  <group>
-                    <field name="bloco_id"/>
-                    <field name="apto_id"/>
+                    <field name="bloco_id" widget="selection"/>
+                    <field name="apto_id" widget="selection"/>
                     <field name="placa_manual"/>
                  </group>
                 </group>
                 <group>
-                    <field name="status"/>
+                    <field name="status" widget="radio"/>
                 </group>
             </sheet>
             <footer>

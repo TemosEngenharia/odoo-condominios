@@ -30,5 +30,6 @@
             'security/ir.model.access.csv',
             'views/occ_controle_acesso.xml',
             'views/occ_virdi.xml',
+            'data/motivos_abertura_manual_cancela.xml',
     ],
 }
