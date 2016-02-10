@@ -79,7 +79,7 @@ class ControleManualCancela(models.Model):
     _rec_name = 'placa_manual'
     _description = u'Tabela com os dados para abertura manual da cancela'
     _table = 'occ_controle_manual_cancela'
-    _order = 'horario desc'
+    _order = 'create_date desc'
     sentido = fields.Selection([('in', u'Entrada'), ('out', u'Saída')],
                                u"Sentido", required=True)
     bloco_id = fields.Many2one('occ.bloco', u'Bloco', required=True)
@@ -116,7 +116,7 @@ class ControleManualVisitante(models.Model):
     visitante_id = fields.Many2one('occ.visitante', u'Visitante',
                                    required=True)
     morador_id = fields.Many2one('occ.morador', u'Entrada autorizada por',
-                                 domain="[('apto_id','='.apto_id)",
+                                 domain="[('apto_id','=',apto_id)]",
                                  required=True)
 
 
@@ -135,5 +135,5 @@ class ControleManualPrestServ(models.Model):
                                      u'Prestador de Serviço',
                                      required=True)
     morador_id = fields.Many2one('occ.morador', u'Entrada autorizada por',
-                                 domain="[('apto_id','='.apto_id)",
+                                 domain="[('apto_id','=',apto_id)]",
                                  required=True)

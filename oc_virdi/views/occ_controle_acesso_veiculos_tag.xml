@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<act_window id="action_occ_controle_acesso"
+  		name="Movimentação de veículos dos moradores"
+  		res_model="occ.controle.acesso"
+  		view_mode="tree,form"
+  		context = "{'search_default_filter_hoje':1}"
+  		target = "current"/>
+  	  	
+  	<menuitem id="menu_occ_controle_acesso"
+  		name="Monitorar Cancelas"
+  		parent="oc_base.oc_Canc"
+  		sequence="0"
+  		action="action_occ_controle_acesso"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  </data>
+  
+  <record id="view_search_occ_controle_acesso" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_acesso</field>
+        <field name="model">occ.controle.acesso</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="morador"/>
+                        <field name="placa"/>
+                      	<filter name="filter_hoje" string="Hoje" domain="[('horario', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('horario', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]"/>
+                      	<separator/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+    	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                </search>
+        </field>
+  </record>
+
+  <record id="view_tree_occ_controle_acesso" model="ir.ui.view">
+  	<field name="name">view_tree_occ_controle_acesso</field>
+  	<field name="model">occ.controle.acesso</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field  name="arch" type="xml">
+   		<tree create="false" edit="false" delete="false" default_order="horario desc">
+            <field name="horario" readonly="1"/>
+            <field name="sentido" readonly="1"/>
+            <field name="morador" readonly="1"/>
+            <field name="placa" readonly="1"/>
+            <field name="status" readonly="1"/>
+    	</tree>
+   	</field>
+  </record>
+
+  <record id="view_form_occ_controle_acesso" model="ir.ui.view">
+  	<field name="name">view_form_occ_controle_acesso</field>
+  	<field name="model">occ.controle.acesso</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field name="arch" type="xml">
+       <form string="Controle de Acesso">
+            <header>
+                <button name="abrir_cancela" type="object" string="Abrir cancela" class="oe_highlight, oe_edit_only" />
+            </header>
+            <sheet>
+                 <group>
+                    <field name="horario"/>
+                    <field name="sentido"/>
+                    <field name="morador"/>
+                    <field name="placa"/>
+                    <field name="status"/>
+                 </group>
+            </sheet>
+       </form>
+    </field>
+  </record>
+</openerp>
