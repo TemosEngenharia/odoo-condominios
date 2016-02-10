@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE openerp>
+<openerp>
+  <data>
+  	<act_window id="action_occ_controle_visitante"
+  		name="Registros de movimentação de visitantes"
+  		res_model="occ.controle.manual.visitante"
+  		view_mode="tree,form"
+  		target = "current"/>
+  	<act_window id="action_occ_controle_registro_visitante"
+  		name="Registrar entrada de visitante"
+  		res_model="occ.controle.manual.visitante"
+  		view_mode="form,tree"
+  		target = "new"/>
+  	  	
+  	<menuitem id="menu_occ_controle_visitante"
+  		name="Movimentação de visitantes"
+  		parent="oc_base.oc_Vis"
+  		sequence="0"
+  		action="action_occ_controle_visitante"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  	<menuitem id="menu_occ_controle_registro_visitante"
+  		name="Registrar entrada de visitante"
+  		parent="oc_base.oc_Vis"
+  		sequence="1"
+  		action="action_occ_controle_registro_visitante"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+
+  </data>
+  
+  <record id="view_search_occ_controle_manual_visitante" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_manual_visitante</field>
+        <field name="model">occ.controle.manual.visitante</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="visitante_id"/>
+                        <field name="apto_id"/>
+                        <field name="bloco_id"/>
+                        <field name="morador_id"/>
+                      	<filter name="filter_hoje" string="Hoje" domain="[('horario', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('horario', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]"/>
+                      	<separator/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+    	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                </search>
+        </field>
+  </record>
+
+  <record id="view_tree_occ_controle_manual_visitante" model="ir.ui.view">
+  	<field name="name">view_tree_occ_controle_manual_visitante</field>
+  	<field name="model">occ.controle.manual.visitante</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field  name="arch" type="xml">
+   		<tree create="false" edit="false" delete="false" default_order="create_date desc">
+            <field name="create_date" readonly="1" string="Horário"/>
+            <field name="sentido" readonly="1"/>
+            <field name="visitante_id" readonly="1"/>
+            <field name="bloco_id" readonly="1"/>
+            <field name="apto_id" readonly="1"/>
+            <field name="morador_id" readonly="1"/>
+    	</tree>
+   	</field>
+  </record>
+
+  <record id="view_form_occ_controle_manual_visitante" model="ir.ui.view">
+  	<field name="name">view_form_occ_controle_manual_visitante</field>
+  	<field name="model">occ.controle.manual.visitante</field>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field name="arch" type="xml">
+       <form string="Registro de entrada de visitante">
+            <header>
+            </header>
+            <sheet>
+            	<group>
+            		<h1>Visitante</h1>
+            	</group>
+            	<group>
+            		<h1>
+                	<field name="visitante_id"/>
+            		</h1>
+            	</group>
+            	<group>
+            	   	<field name="sentido" widget="radio"/>
+                    <field name="bloco_id" widget="selection"/>
+                    <field name="apto_id" widget="selection"/>
+                    <field name="morador_id" widget="selection"/>
+                 </group>
+            </sheet>
+            <footer>
+            	<button name="write" type="object" string="Gravar"/>
+            	<button name="cancel" string="Cancelar" special="cancel" class="oe_link"/>
+            </footer>
+       </form>
+    </field>
+  </record>
+</openerp>

@@ -11,7 +11,7 @@
 	</record>
 	<record id="motivo_03" model="occ.status.abertura.manual">
 		<field name="active">True</field>
-		<field name="name">Moradro utilizando carro reserva</field>
+		<field name="name">Morador utilizando carro reserva</field>
 	</record>
 	<record id="motivo_04" model="occ.status.abertura.manual">
 		<field name="active">True</field>

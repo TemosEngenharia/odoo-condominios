@@ -24,6 +24,26 @@
   		res_model="occ.status.abertura.manual"
   		view_mode="tree,form"
   		target = "current"/>
+  	<act_window id="action_occ_controle_manual_visitante"
+  		name="Registar entrada de visitante"
+  		res_model="occ.controle.manual.visitante"
+  		view_mode="tree,form"
+  		target = "new"/>
+  	<act_window id="action_occ_controle_manual_visitante"
+  		name="Registros de movimentação de visitantes"
+  		res_model="occ.controle.manual.visitante"
+  		view_mode="tree,form"
+  		target = "current"/>
+  	<act_window id="action_occ_controle_manual_prestserv"
+  		name="Relação dos registros de entradas de prestadores de serviço"
+  		res_model="occ.controle.manual.funcionario"
+  		view_mode="tree,form"
+  		target = "current"/>
+  	<act_window id="action_occ_controle_manual_prestserv"
+  		name="Relação dos registros de entradas de prestadores de serviço"
+  		res_model="occ.controle.manual.funcionario"
+  		view_mode="tree,form"
+  		target = "current"/>
   	  	
   	<menuitem id="menu_occ_controle_acesso"
   		name="Monitorar Cancelas"
@@ -49,6 +69,18 @@
   		sequence="0"
   		action="action_occ_status_abertura_manual"
   		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  	<menuitem id="menu_occ_controle_manual_visitante"
+  		name="Registro de entrada de visitantes"
+  		parent="oc_base.oc_Vis"
+  		sequence="0"
+  		action="action_occ_controle_manual_visitante"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
+  	<menuitem id="menu_occ_controle_manual_prestserv"
+  		name="Registro de entrada de prestadores de serviço"
+  		parent="oc_base.oc_PrestServ"
+  		sequence="0"
+  		action="action_occ_controle_manual_prestserv"
+  		groups="group_occ_manager_virdi,group_occ_user_virdi"/>  	
 
   </data>
   
@@ -69,6 +101,40 @@
   
   <record id="view_search_occ_controle_manual_cancela" model="ir.ui.view">
         <field name="name">view_search_occ_controle_manual_cancela</field>
+        <field name="model">occ.controle.manual.cancela</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="bloco_id"/>
+                        <field name="apto_id"/>
+                        <field name="morador_id"/>
+                        <field name="placa_id"/>
+                      	<filter name="filter_hoje" string="Hoje" domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%Y.%m.%d - 00:00:00')),('create_date', '&lt;=', datetime.datetime.now().strftime('%Y.%m.%d 23:59:59'))]"/>
+                      	<separator/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+    	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                </search>
+        </field>
+  </record>
+
+  <record id="view_search_occ_controle_manual_visitante" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_manual_visitante</field>
+        <field name="model">occ.controle.manual.visitante</field>
+        <field name="arch" type="xml">
+                <search>
+                        <field name="bloco_id"/>
+                        <field name="apto_id"/>
+                        <field name="morador_id"/>
+                        <field name="placa_id"/>
+                      	<filter name="filter_hoje" string="Hoje" domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%Y.%m.%d - 00:00:00')),('create_date', '&lt;=', datetime.datetime.now().strftime('%Y.%m.%d 23:59:59'))]"/>
+                      	<separator/>
+                        <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
+    	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
+                </search>
+        </field>
+  </record>
+
+  <record id="view_search_occ_controle_manual_prestserv" model="ir.ui.view">
+        <field name="name">view_search_occ_controle_manual_prestserv</field>
         <field name="model">occ.controle.manual.cancela</field>
         <field name="arch" type="xml">
                 <search>

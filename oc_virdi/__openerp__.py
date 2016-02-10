@@ -28,7 +28,10 @@
     'data': [
             'security/oc_virdi_security.xml',
             'security/ir.model.access.csv',
-            'views/occ_controle_acesso.xml',
+            'views/occ_controle_acesso_veiculos_tag.xml',
+            'views/occ_controle_acesso_veiculos_manual.xml',
+            'views/occ_controle_acesso_prestserv.xml',
+            'views/occ_controle_acesso_visitante.xml',
             'views/occ_virdi.xml',
             'data/motivos_abertura_manual_cancela.xml',
     ],
