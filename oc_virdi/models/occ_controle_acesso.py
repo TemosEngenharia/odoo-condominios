@@ -115,7 +115,7 @@ class ControleManualVisitante(models.Model):
     visitante_id = fields.Many2one('occ.visitante', u'Visitante',
                                    required=True)
     morador_id = fields.Many2one('occ.morador', u'Entrada autorizada por',
-                                 domain="[('apto_id','='.apto_id)",
+                                 domain="[('apto_id','=',apto_id)]",
                                  required=True)
 
 
@@ -134,5 +134,5 @@ class ControleManualPrestServ(models.Model):
                                      u'Prestador de Serviço',
                                      required=True)
     morador_id = fields.Many2one('occ.morador', u'Entrada autorizada por',
-                                 domain="[('apto_id','='.apto_id)",
+                                 domain="[('apto_id','=',apto_id)]",
                                  required=True)
