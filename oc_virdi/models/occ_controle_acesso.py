@@ -78,7 +78,7 @@ class ControleManualCancela(models.Model):
     _rec_name = 'placa_manual'
     _description = u'Tabela com os dados para abertura manual da cancela'
     _table = 'occ_controle_manual_cancela'
-    _order = 'horario desc'
+    _order = 'create_date desc'
     sentido = fields.Selection([('in', u'Entrada'), ('out', u'Saída')],
                                u"Sentido", required=True)
     bloco_id = fields.Many2one('occ.bloco', u'Bloco', required=True)
