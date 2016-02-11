@@ -37,10 +37,11 @@
   	<field name="model">occ.controle.acesso</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
-   		<tree create="false" edit="false" delete="false" default_order="horario desc">
+   		<tree create="false" edit="false" delete="true" default_order="horario desc">
             <field name="horario" readonly="1"/>
             <field name="sentido" readonly="1"/>
             <field name="morador" readonly="1"/>
+            <field name="apto_id" readonly="1"/>
             <field name="placa" readonly="1"/>
             <field name="status" readonly="1"/>
     	</tree>
@@ -61,6 +62,7 @@
                     <field name="horario"/>
                     <field name="sentido"/>
                     <field name="morador"/>
+            		<field name="apto_id"/>
                     <field name="placa"/>
                     <field name="status"/>
                  </group>

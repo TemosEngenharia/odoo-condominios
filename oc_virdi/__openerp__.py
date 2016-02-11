@@ -17,7 +17,7 @@
     # /module_data.xml
     # for the full list
     'category': 'Specific Industry Applications',
-    'version': '9.0.1.0.0',
+    'version': '9.0.3.0.0',
 
     'application': True,
 

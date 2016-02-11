@@ -23,7 +23,7 @@
   	<field name="name">view_tree_occ_virdi</field>
   	<field name="model">occ.virdi</field>
   	<field name="type">tree</field>
-  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
+  	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi'))]"/>
   	<field  name="arch" type="xml">
    		<tree string="occ.object.tree">
    			<field name="terminal_id" readonly="1"/>
