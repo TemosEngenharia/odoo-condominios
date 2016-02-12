@@ -41,7 +41,7 @@ class VirdiTerminais(models.Model):
 
 class ControleAcesso(models.Model):
     _name = 'occ.controle.acesso'
-    _rec_name = 'placa'
+    _rec_name = 'apto_id'
     _description = u'Tabela de Controle de Acesso'
     _table = 'occ_controle_acesso'
     _order = 'horario desc'
@@ -51,6 +51,7 @@ class ControleAcesso(models.Model):
                                u"Sentido")
     morador = fields.Many2one('occ.morador', u'Morador')
     placa = fields.Many2one('occ.veiculo', u'Placa')
+    apto_id = fields.Many2one('occ.apto', u'Apartamento')
     status = fields.Char(u'Situação')
 
     @api.multi
