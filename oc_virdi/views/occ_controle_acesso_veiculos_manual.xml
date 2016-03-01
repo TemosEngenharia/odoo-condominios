@@ -104,9 +104,9 @@
                     <field name="sentido" widget="radio"/>
                  </group>
                  <group>
-                    <field name="bloco_id" readonly="1"/>
-                    <field name="apto_id" readonly="1"/>
-                    <field name="morador_id" readonly="1"/>
+                    <field name="bloco_id" widget="selection"/>
+                    <field name="apto_id" widget="selection"/>
+                    <field name="morador_id" widget="selection"/>
                     <field name="placa_manual"/>
                  </group>
                 </group>
