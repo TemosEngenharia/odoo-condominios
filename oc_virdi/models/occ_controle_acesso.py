@@ -88,7 +88,8 @@ class ControleManualCancela(models.Model):
                               domain="[('bloco_id','=',bloco_id)]")
     placa_manual = fields.Char(u'Placa', size=7, required=True)
     placa_id = fields.Many2one('occ.veiculo', u'Placa')
-    morador_id = fields.Many2one('occ.morador', u'Morador')
+    morador_id = fields.Many2one('occ.morador', u'Morador', required=True,
+                                 domain="[('apto_id','=',apto_id)]")
     status = fields.Many2one('occ.status.abertura.manual', u'Situação',
                              required=True)
 

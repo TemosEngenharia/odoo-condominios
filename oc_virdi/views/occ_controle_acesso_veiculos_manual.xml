@@ -48,7 +48,13 @@
                         <field name="apto_id"/>
                         <field name="morador_id"/>
                         <field name="placa_id"/>
-                      	<filter name="filter_hoje" string="Hoje" domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%Y.%m.%d - 00:00:00')),('create_date', '&lt;=', datetime.datetime.now().strftime('%Y.%m.%d 23:59:59'))]"/>
+                        <filter
+                            name="filter_hoje"
+                            string="Hoje"
+                            domain="[
+                                    ('create_date','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
+                                   ('create_date','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))
+                                   ]"/>
                       	<separator/>
                         <filter string="Entrada" name="sentido" domain="[('sentido','=','in')]"/>
     	                <filter string="Saída" name="sentido" domain="[('sentido','=','out')]"/>
@@ -66,6 +72,7 @@
             <field name="sentido" readonly="1"/>
             <field name="bloco_id" readonly="1"/>
             <field name="apto_id" readonly="1"/>
+            <field name="morador_id" readonly="1"/>
             <field name="placa_manual" readonly="1"/>
             <field name="status" readonly="1"/>
     	</tree>
@@ -99,6 +106,7 @@
                  <group>
                     <field name="bloco_id" widget="selection"/>
                     <field name="apto_id" widget="selection"/>
+                    <field name="morador_id" widget="selection"/>
                     <field name="placa_manual"/>
                  </group>
                 </group>
