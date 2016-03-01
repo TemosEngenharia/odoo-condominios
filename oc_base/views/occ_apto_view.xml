@@ -47,6 +47,7 @@
     	  			<group name="group">
 	        			<field name="name"/>
 	  					<field name="bloco_id"/>
+	  					<field numero="numero"/>
       				</group>
 				</group>
 				<group>
