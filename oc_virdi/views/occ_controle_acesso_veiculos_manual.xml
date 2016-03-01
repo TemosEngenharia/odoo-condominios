@@ -66,6 +66,7 @@
             <field name="sentido" readonly="1"/>
             <field name="bloco_id" readonly="1"/>
             <field name="apto_id" readonly="1"/>
+            <field name="morador_id" readonly="1"/>
             <field name="placa_manual" readonly="1"/>
             <field name="status" readonly="1"/>
     	</tree>
@@ -99,6 +100,7 @@
                  <group>
                     <field name="bloco_id" widget="selection"/>
                     <field name="apto_id" widget="selection"/>
+                    <field name="morador_id" widget="selection"/>
                     <field name="placa_manual"/>
                  </group>
                 </group>
