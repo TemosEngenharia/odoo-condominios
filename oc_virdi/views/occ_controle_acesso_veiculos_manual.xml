@@ -68,7 +68,7 @@
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
    		<tree create="false" edit="false" delete="false" default_order="create_date desc">
-            <field name="create_date" widget="datetime.strftime('%Y-%m-%d %H:%m:%s')" readonly="1" string="Horário da liberação"/>
+            <field name="create_date" widget="datetime" readonly="1" string="Horário da liberação"/>
             <field name="sentido" readonly="1"/>
             <field name="bloco_id" readonly="1"/>
             <field name="apto_id" readonly="1"/>
