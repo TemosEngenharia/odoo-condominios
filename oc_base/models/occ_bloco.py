@@ -10,7 +10,7 @@ class OccBloco(models.Model):
     _sql_constraints = [('occ.bloco', 'UNIQUE (name)',
                          'Os nomes dos blocos devem ser únicos')]
     active = fields.Boolean('Ativo', default=True)
-    name = fields.Char('Bloco', size=4, required=True)
+    name = fields.Char('Bloco', size=40, required=True)
     apto_ids = fields.One2many('occ.apto', 'bloco_id',
                                'Apartamentos neste bloco')
     morador_ids = fields.One2many('occ.morador', 'bloco_id',
