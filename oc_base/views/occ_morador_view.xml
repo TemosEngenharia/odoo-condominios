@@ -50,6 +50,7 @@
 			   	</group>
 			   	<group>
         			<field name="name" label="Nome completo"/>
+        			<field name="active" label="Ativo"/>
         			<field name="cpf"/>
         			<field name="rg"/>
         			<field name="fone" label="Telefone Fixo"/>
