@@ -10,7 +10,7 @@ class OccVagaCarro(models.Model):
     _sql_constraints = [('occ.vaga.carro', 'UNIQUE (name)',
                          'Os nomes das vagas devem ser únicos')]
     active = fields.Boolean('Ativo', default=True)
-    name = fields.Char(string='Vaga Carro', size=4, required=True)
+    name = fields.Char(string='Vaga Carro', size=40, required=True)
     bloco_id = fields.Many2one('occ.bloco', 'Bloco', required=True)
     apto_id = fields.Many2one('occ.apto', 'Apartamento',
                               domain="[('bloco_id','=',bloco_id)]")
@@ -28,7 +28,7 @@ class OccVagaMoto(models.Model):
     _sql_constraints = [('occ.vaga.moto', 'UNIQUE (name)',
                          'Os nomes das vagas devem ser únicos')]
     active = fields.Boolean('Ativo', default=True)
-    name = fields.Char(string='Vaga Moto', size=4, required=True)
+    name = fields.Char(string='Vaga Moto', size=40, required=True)
     bloco_id = fields.Many2one('occ.bloco', 'Bloco', required=True)
     apto_id = fields.Many2one('occ.apto', 'Apartamento',
                               domain="[('bloco_id','=',bloco_id)]")
