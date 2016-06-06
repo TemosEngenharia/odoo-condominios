@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from openerp import models, fields, api
+from openerp.exceptions import ValidationError
 
 
 class VirdiAcesso(models.Model):
@@ -53,16 +54,6 @@ class ControleAcesso(models.Model):
     apto_id = fields.Many2one('occ.apto', u'Apartamento')
     status = fields.Char(u'Situação')
 
-    @api.multi
-    def abrir_cancela(self):
-        sql = """
-            UPDATE occ_virdi SET terminal_status = 'open'
-                WHERE terminal_tipo = %s;
-        """
-        self.env.cr.execute(sql, (self.sentido, ))
-        self.env.invalidate_all()
-        return True
-
 
 class StatusAcessoManualCancela(models.Model):
     _name = 'occ.status.abertura.manual'
@@ -80,25 +71,82 @@ class ControleManualCancela(models.Model):
     _description = u'Tabela com os dados para abertura manual da cancela'
     _table = 'occ_controle_manual_cancela'
     _order = 'create_date desc'
+    active = fields.Boolean(default=True)
+    overwrite = fields.Boolean(default=False)
     sentido = fields.Selection([('in', u'Entrada'), ('out', u'Saída')],
                                u"Sentido", required=True)
     bloco_id = fields.Many2one('occ.bloco', u'Bloco', required=True)
     apto_id = fields.Many2one('occ.apto', u'Apartamento', required=True,
                               domain="[('bloco_id','=',bloco_id)]")
-    placa_manual = fields.Char(u'Placa', size=7, required=True)
-    placa_id = fields.Many2one('occ.veiculo', u'Placa')
     morador_id = fields.Many2one('occ.morador', u'Morador', required=True,
                                  domain="[('apto_id','=',apto_id)]")
+    placa_id = fields.Many2one('occ.veiculo', u'Placa',
+                               domain="[('morador_id','=',morador_id)]")
+    placa_manual = fields.Char(u'Placa', size=7, required=True)
+    tipo_manual = fields.Selection([('carro', u'Carro'), ('moto', u'Moto')],
+                                   u"Tipo", required=True)
     status = fields.Many2one('occ.status.abertura.manual', u'Situação',
                              required=True)
+    vagas_dispo_carro = fields.Integer(related='morador_id.dispo_vagas_carro',
+                                       store=True)
+    vagas_dispo_moto = fields.Integer(related='morador_id.dispo_vagas_moto',
+                                      store=True)
+
+    @api.one
+    @api.constrains('vagas_dispo_carro')
+    def _check_vaga_dispo_carro(self):
+        dispo_vagas_carro = 0
+        if not self.overwrite:
+            if self.sentido == 'in':
+                if self.tipo_manual == 'carro':
+                    dispo_vagas_carro = self.vagas_dispo_carro
+                    if dispo_vagas_carro < 0:
+                        raise ValidationError(
+                            "Morador não possui vagas de carro disponíveis")
+
+    @api.one
+    @api.constrains('vagas_dispo_moto')
+    def _check_vaga_dispo_moto(self):
+        dispo_vagas_moto = 0
+        if not self.overwrite:
+            if self.sentido == 'in':
+                if self.tipo_manual == 'moto':
+                    dispo_vagas_moto = self.vagas_dispo_moto
+                    if dispo_vagas_moto < 0:
+                        raise ValidationError(
+                            "Morador não possui vagas de moto disponíveis")
 
     @api.multi
     def write(self, vals):
-        sql = """
+        dispo_vagas_moto = 0
+        dispo_vagas_carro = 0
+        if not self.overwrite:
+            if self.sentido == 'in':
+                if self.tipo_manual == 'moto':
+                    dispo_vagas_moto = self.vagas_dispo_moto - 1
+                    self.morador_id.dispo_vagas_moto = dispo_vagas_moto
+                if self.tipo_manual == 'carro':
+                    dispo_vagas_carro = self.vagas_dispo_carro - 1
+                    self.morador_id.dispo_vagas_carro = dispo_vagas_carro
+            if self.sentido == 'out':
+                if self.tipo_manual == 'moto':
+                    dispo_vagas_moto = self.vagas_dispo_moto + 1
+                    if dispo_vagas_moto <= self.morador_id.total_vagas_moto:
+                        self.morador_id.dispo_vagas_moto = dispo_vagas_moto
+                    else:
+                        self.morador_id.dispo_vagas_moto = self.morador_id.total_vagas_moto
+                if self.tipo_manual == 'carro':
+                    dispo_vagas_carro = self.vagas_dispo_carro + 1
+                    if dispo_vagas_carro <= self.morador_id.total_vagas_carro:
+                        self.morador_id.dispo_vagas_carro = dispo_vagas_carro
+                    else:
+                        self.morador_id.dispo_vagas_carro = self.morador_id.total_vagas_carro
+        sql_write = """
             UPDATE occ_virdi SET terminal_status = 'open'
                 WHERE terminal_tipo = %s;
         """
-        self.env.cr.execute(sql, (self.sentido, ))
+        self.env.cr.execute(sql_write, (self.sentido, ))
+        sql_write
         self.env.invalidate_all()
         return models.Model.write(self, vals)
 
