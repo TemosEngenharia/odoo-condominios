@@ -134,13 +134,15 @@ class ControleManualCancela(models.Model):
                     if dispo_vagas_moto <= self.morador_id.total_vagas_moto:
                         self.morador_id.dispo_vagas_moto = dispo_vagas_moto
                     else:
-                        self.morador_id.dispo_vagas_moto = self.morador_id.total_vagas_moto
+                        self.morador_id.dispo_vagas_moto =\
+                            self.morador_id.total_vagas_moto
                 if self.tipo_manual == 'carro':
                     dispo_vagas_carro = self.vagas_dispo_carro + 1
                     if dispo_vagas_carro <= self.morador_id.total_vagas_carro:
                         self.morador_id.dispo_vagas_carro = dispo_vagas_carro
                     else:
-                        self.morador_id.dispo_vagas_carro = self.morador_id.total_vagas_carro
+                        self.morador_id.dispo_vagas_carro =\
+                            self.morador_id.total_vagas_carro
         sql_write = """
             UPDATE occ_virdi SET terminal_status = 'open'
                 WHERE terminal_tipo = %s;
