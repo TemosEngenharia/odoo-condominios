@@ -67,7 +67,7 @@
   	<field name="model">occ.controle.manual.cancela</field>
   	<field name="groups_id" eval="[(4, ref('group_occ_manager_virdi')),(4, ref('group_occ_user_virdi'))]"/>
   	<field  name="arch" type="xml">
-   		<tree create="false" edit="false" delete="false" default_order="create_date desc">
+   		<tree create="false" edit="false" delete="true" default_order="create_date desc">
             <field name="create_date" widget="datetime" readonly="1" string="Horário da liberação"/>
             <field name="sentido" readonly="1"/>
             <field name="bloco_id" readonly="1"/>
@@ -108,15 +108,27 @@
                     <field name="apto_id" widget="selection"/>
                     <field name="morador_id" widget="selection"/>
                     <field name="placa_manual"/>
+                    <field name="tipo_manual" widget="radio"/>
+                    <field name="vagas_dispo_carro" string="Vagas disponíveis para carros" readonly="1"/>
+                    <field name="vagas_dispo_moto" string="Vagas disponíveis para motos" readonly="1"/>
+                    <field name="overwrite" string="Forçar liberação"/>
                  </group>
                 </group>
                 <group>
-                    <field name="status" widget="radio"/>
+                    <field name="status" widget="selection"/>
                 </group>
             </sheet>
             <footer>
-            	<button name="write" type="object" string="Abrir"/>
-            	<button name="cancel" string="Cancelar" special="cancel" class="oe_link"/>
+            	<button
+            		name="write"
+            		type="object"
+            		string="Abrir"
+            		class="oe_link"/>
+            	<button
+            		name="cancel"
+            		string="Cancelar"
+            		special="cancel"
+            		class="oe_link"/>
             </footer>
        </form>
     </field>
